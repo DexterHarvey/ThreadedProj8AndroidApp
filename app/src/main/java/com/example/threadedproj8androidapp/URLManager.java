@@ -1,0 +1,18 @@
+package com.example.threadedproj8androidapp;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+
+public class URLManager {
+    public static String getLoginURL(String inputUsername, String inputPassword) {
+        try {
+            String encodedUsername = URLEncoder.encode(inputUsername, StandardCharsets.UTF_8.toString());
+            String encodedPassword = URLEncoder.encode(inputPassword, StandardCharsets.UTF_8.toString());
+            return "http://10.0.2.2:8080/RESTApiForAndroid_war_exploded/api/customers/getlogin/" + encodedUsername + "/" + encodedPassword;
+        } catch (UnsupportedEncodingException e) {
+            return e.toString();
+        }
+    }
+
+}

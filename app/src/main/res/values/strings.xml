@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">ThreadedProj8AndroidApp</string>
+    <string name="hintUsername">Username</string>
+    <string name="hintPassword">Password</string>
+    <string name="btnLogin">Login</string>
+    <string name="lblCustFName">First Name:</string>
+    <string name="lblCustLName">Last Name:</string>
+    <string name="lblCustAddress">Address:</string>
+    <string name="lblCustCity">City:</string>
+    <string name="lblCustProv">Province:</string>
+    <string name="lblCustPostal">Postal Code:</string>
+    <string name="lblCustCountry">Country:</string>
+    <string name="lblCustHomePhone">Home Phone:</string>
+    <string name="lblCustBusPhone">Business Phone:</string>
+    <string name="lblCustEmail">Email:</string>
+    <string name="lblCustUsername">Username:</string>
+    <string name="lblCustPassword">Password:</string>
+</resources>
