@@ -14,5 +14,12 @@ public class URLManager {
             return e.toString();
         }
     }
-
+    public static String getBookingDetailsURL(String custId) {
+        try {
+            String encodedCustId = URLEncoder.encode(custId, StandardCharsets.UTF_8.toString());
+            return "http://10.0.2.2:8080/RESTApiForAndroid_war_exploded/api/bookingdetails/getbookingdetailsbycustid/" + encodedCustId;
+        } catch (UnsupportedEncodingException e) {
+            return e.toString();
+        }
+    }
 }

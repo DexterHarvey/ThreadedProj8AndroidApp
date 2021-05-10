@@ -63,83 +63,23 @@ public class MainActivity extends AppCompatActivity {
                             response -> {
                                 try {
                                     if (response.has("customerId"))
-                                    try {
-                                     CustomerEntity customer = CustomerHandler.buildCustomer(response);
-                                     Intent intent = new Intent(getApplicationContext(), CustomerActivity.class);
-                                     intent.putExtra("customer", (Serializable) customer);
-                                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                     getApplicationContext().startActivity(intent);
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
+                                        try {
+                                            CustomerEntity customer = CustomerHandler.buildCustomer(response);
+                                            Intent intent = new Intent(getApplicationContext(), CustomerActivity.class);
+                                            intent.putExtra("customer", (Serializable) customer);
+                                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                            getApplicationContext().startActivity(intent);
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
-                            }, error -> Toast.makeText(getApplicationContext(),error.toString(), Toast.LENGTH_SHORT).show());
+                            }, error -> Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show());
                     queue.start();
                     queue.add(custRequest);
                 }
             }
         });
     }
-    // Instantiate the RequestQueue.
-
 }
-//    private String login(String inputUsername, String inputPassword) {
-//        String url = "/" + inputUsername + "/" + inputPassword;
-//        CustomerHandler.login(url, null, new JsonHttpResponseHandler() {
-//            @Override
-//            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-//                JSONObject object = response;
-//            }
-//
-//            @Override
-//            public void onSuccess(int statusCode, Header[] headers, JSONArray timeline) {
-//                // Pull out the first event on the public timeline
-//                JSONObject firstEvent = null;
-//                try {
-//                    firstEvent = (JSONObject) timeline.get(0);
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//                String tweetText = null;
-//                try {
-//                    tweetText = firstEvent.getString("pkgDesc");
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//
-//                // Do something with the response
-//                System.out.println(tweetText);
-//            }
-//        });
-//    }
-//    private void getAllPackages() {
-//        CustomerHandler.get("https://reqres.in/api/users", null, new JsonHttpResponseHandler() {
-//            @Override
-//            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-//                JSONObject object = response;
-//            }
-//
-//            @Override
-//            public void onSuccess(int statusCode, Header[] headers, JSONArray timeline) {
-//                // Pull out the first event on the public timeline
-//                JSONObject firstEvent = null;
-//                try {
-//                    firstEvent = (JSONObject) timeline.get(0);
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//                String tweetText = null;
-//                try {
-//                    tweetText = firstEvent.getString("pkgDesc");
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//
-//                // Do something with the response
-//                System.out.println(tweetText);
-//            }
-//        });
-//    }
-//}
