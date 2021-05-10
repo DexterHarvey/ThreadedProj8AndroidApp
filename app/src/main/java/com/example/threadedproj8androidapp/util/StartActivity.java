@@ -1,7 +1,10 @@
-package com.example.threadedproj8androidapp;
+package com.example.threadedproj8androidapp.util;
 
 import android.content.Intent;
 import android.os.Bundle;
+
+import com.example.threadedproj8androidapp.R;
+import com.example.threadedproj8androidapp.util.MainActivity;
 import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;

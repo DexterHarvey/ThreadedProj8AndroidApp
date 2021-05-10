@@ -1,4 +1,4 @@
-package com.example.threadedproj8androidapp;
+package com.example.threadedproj8androidapp.adapter;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -7,9 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.threadedproj8androidapp.model.BookingDetailsEntity;
+import com.example.threadedproj8androidapp.R;
+
 import java.util.ArrayList;
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.BookingDetailsViewHolder> {
+public class BookingDetailsAdapter extends RecyclerView.Adapter<BookingDetailsAdapter.BookingDetailsViewHolder> {
     private ArrayList<BookingDetailsEntity> bookingDetails = new ArrayList<>();
 
     @NonNull

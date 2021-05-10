@@ -1,12 +1,12 @@
-package com.example.threadedproj8androidapp;
+package com.example.threadedproj8androidapp.managers;
 
-import com.loopj.android.http.*;
+import com.example.threadedproj8androidapp.model.CustomerEntity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 
-public class CustomerHandler {
+public class CustomerManager {
     public static CustomerEntity buildCustomer(JSONObject custData) throws JSONException {
         CustomerEntity customer = new CustomerEntity();
         customer.setCustomerId(custData.getInt("customerId"));

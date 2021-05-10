@@ -1,4 +1,4 @@
-package com.example.threadedproj8androidapp;
+package com.example.threadedproj8androidapp.util;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,11 +10,12 @@ import androidx.fragment.app.Fragment;
 
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.example.threadedproj8androidapp.databinding.FragmentFirst2Binding;
+import com.example.threadedproj8androidapp.R;
+import com.example.threadedproj8androidapp.databinding.FragmentSecond2Binding;
 
-public class First2Fragment extends Fragment {
+public class Second2Fragment extends Fragment {
 
-    private FragmentFirst2Binding binding;
+    private FragmentSecond2Binding binding;
 
     @Override
     public View onCreateView(
@@ -22,7 +23,7 @@ public class First2Fragment extends Fragment {
             Bundle savedInstanceState
     ) {
 
-        binding = FragmentFirst2Binding.inflate(inflater, container, false);
+        binding = FragmentSecond2Binding.inflate(inflater, container, false);
         return binding.getRoot();
 
     }
@@ -30,11 +31,11 @@ public class First2Fragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.buttonFirst.setOnClickListener(new View.OnClickListener() {
+        binding.buttonSecond.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavHostFragment.findNavController(First2Fragment.this)
-                        .navigate(R.id.action_First2Fragment_to_Second2Fragment);
+                NavHostFragment.findNavController(Second2Fragment.this)
+                        .navigate(R.id.action_Second2Fragment_to_First2Fragment);
             }
         });
     }

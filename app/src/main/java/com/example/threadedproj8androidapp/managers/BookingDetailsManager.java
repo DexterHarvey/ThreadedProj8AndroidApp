@@ -1,9 +1,11 @@
-package com.example.threadedproj8androidapp;
+package com.example.threadedproj8androidapp.managers;
+
+import com.example.threadedproj8androidapp.model.BookingDetailsEntity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class BookingDetailsHandler {
+public class BookingDetailsManager {
     public static BookingDetailsEntity buildBookingDetails(JSONObject bookingData) throws JSONException {
         BookingDetailsEntity booking = new BookingDetailsEntity();
         booking.setBookingDetailId(bookingData.getInt("bookingDetailId"));

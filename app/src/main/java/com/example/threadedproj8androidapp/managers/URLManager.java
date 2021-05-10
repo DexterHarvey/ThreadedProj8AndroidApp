@@ -1,4 +1,4 @@
-package com.example.threadedproj8androidapp;
+package com.example.threadedproj8androidapp.managers;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;

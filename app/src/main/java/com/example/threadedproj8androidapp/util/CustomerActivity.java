@@ -1,4 +1,4 @@
-package com.example.threadedproj8androidapp;
+package com.example.threadedproj8androidapp.util;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +15,12 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.threadedproj8androidapp.managers.BookingDetailsManager;
+import com.example.threadedproj8androidapp.R;
+import com.example.threadedproj8androidapp.managers.URLManager;
+import com.example.threadedproj8androidapp.adapter.BookingDetailsAdapter;
+import com.example.threadedproj8androidapp.model.BookingDetailsEntity;
+import com.example.threadedproj8androidapp.model.CustomerEntity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,7 +41,7 @@ public class CustomerActivity extends AppCompatActivity {
     TextView lblUsernameValue;
     TextView lblPasswordValue;
     RecyclerView rvBookingDetails;
-    MyAdapter adapter;
+    BookingDetailsAdapter adapter;
     RequestQueue queue;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,7 +74,7 @@ public class CustomerActivity extends AppCompatActivity {
         lblUsernameValue.setText(customer.getUsername());
         lblPasswordValue.setText(customer.getPassword());
         ArrayList<BookingDetailsEntity> bookings = new ArrayList<>();
-        adapter = new MyAdapter();
+        adapter = new BookingDetailsAdapter();
         rvBookingDetails.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         rvBookingDetails.setAdapter(adapter);
         queue = Volley.newRequestQueue(this);
@@ -78,7 +84,7 @@ public class CustomerActivity extends AppCompatActivity {
                     public void onResponse(JSONArray response) {
                         try {
                             for (int i=0; i < response.length(); i++) {
-                                BookingDetailsEntity bd = BookingDetailsHandler.buildBookingDetails(response.getJSONObject(i));
+                                BookingDetailsEntity bd = BookingDetailsManager.buildBookingDetails(response.getJSONObject(i));
                                 bookings.add(bd);
                                 adapter.updateData(bookings);
                             }
@@ -89,5 +95,6 @@ public class CustomerActivity extends AppCompatActivity {
                 }, error -> Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show());
         queue.add(detailsRequest);
         queue.start();
+
     }
 }

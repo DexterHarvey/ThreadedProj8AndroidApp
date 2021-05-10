@@ -1,4 +1,4 @@
-package com.example.threadedproj8androidapp;
+package com.example.threadedproj8androidapp.model;
 
 import java.io.Serializable;
 
