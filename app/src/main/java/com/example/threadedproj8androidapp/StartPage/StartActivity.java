@@ -1,10 +1,14 @@
-package com.example.threadedproj8androidapp;
+package com.example.threadedproj8androidapp.StartPage;
 
 import android.content.Intent;
 import android.os.Bundle;
+
+import com.example.threadedproj8androidapp.MainActivity;
+import com.example.threadedproj8androidapp.R;
 import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -17,6 +21,7 @@ public class StartActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
     private ActivityStartBinding binding;
+    TextView tvTest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +31,7 @@ public class StartActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.toolbar);
+
 
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_start);
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
@@ -42,6 +48,8 @@ public class StartActivity extends AppCompatActivity {
             }
         });
     }
+
+
 
     @Override
     public boolean onSupportNavigateUp() {

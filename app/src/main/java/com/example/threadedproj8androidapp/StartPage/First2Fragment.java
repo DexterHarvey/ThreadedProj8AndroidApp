@@ -1,20 +1,23 @@
-package com.example.threadedproj8androidapp;
+package com.example.threadedproj8androidapp.StartPage;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.example.threadedproj8androidapp.R;
 import com.example.threadedproj8androidapp.databinding.FragmentFirst2Binding;
 
 public class First2Fragment extends Fragment {
 
     private FragmentFirst2Binding binding;
+    TextView tvTest;
 
     @Override
     public View onCreateView(
@@ -29,6 +32,7 @@ public class First2Fragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
 
         binding.buttonFirst.setOnClickListener(new View.OnClickListener() {
             @Override
