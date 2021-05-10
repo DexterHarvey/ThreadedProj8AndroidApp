@@ -23,11 +23,19 @@
     <include layout="@layout/content_start" />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/btnToLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@drawable/ic_action_name" />
+        app:srcCompat="@drawable/ic_login" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/btnToSomewhere"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|start"
+        android:layout_margin="@dimen/fab_margin"
+        app:srcCompat="@drawable/ic_map" />
 
 </android.support.design.widget.CoordinatorLayout>
