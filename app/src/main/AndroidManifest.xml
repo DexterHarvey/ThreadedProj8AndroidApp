@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.threadedproj8androidapp">
+
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -10,13 +11,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ThreadedProj8AndroidApp"
         android:usesCleartextTraffic="true">
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".StartActivity"
+            android:label="@string/title_activity_start"
+            android:theme="@style/Theme.ThreadedProj8AndroidApp.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MainActivity">
+
+        </activity>
+
         <activity android:name=".CustomerActivity" />
     </application>
 
