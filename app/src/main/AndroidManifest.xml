@@ -14,14 +14,17 @@
         <activity
             android:name=".StartActivity"
             android:label="@string/title_activity_start"
-            android:theme="@style/Theme.ThreadedProj8AndroidApp.NoActionBar"></activity>
-        <activity android:name=".MainActivity">
+            android:theme="@style/Theme.ThreadedProj8AndroidApp.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MainActivity">
+
+        </activity>
+
         <activity android:name=".CustomerActivity" />
     </application>
 
