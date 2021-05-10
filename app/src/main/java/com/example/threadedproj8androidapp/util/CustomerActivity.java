@@ -27,7 +27,7 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 
-public class CustomerActivity extends AppCompatActivity {
+public class CustomerActivity extends AppCompatActivity implements BookingDetailsAdapter.OnBookingDetailListener {
     EditText txtCustFName;
     EditText txtCustLName;
     EditText txtCustAddress;
@@ -43,6 +43,7 @@ public class CustomerActivity extends AppCompatActivity {
     RecyclerView rvBookingDetails;
     BookingDetailsAdapter adapter;
     RequestQueue queue;
+    ArrayList<BookingDetailsEntity> bookings = new ArrayList<>();
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer);
@@ -71,10 +72,9 @@ public class CustomerActivity extends AppCompatActivity {
         txtCustHomePhone.setText(customer.getCustHomePhone());
         txtCustBusPhone.setText(customer.getCustBusPhone());
         txtCustEmail.setText(customer.getCustEmail());
+        adapter = new BookingDetailsAdapter(bookings, this);
         lblUsernameValue.setText(customer.getUsername());
         lblPasswordValue.setText(customer.getPassword());
-        ArrayList<BookingDetailsEntity> bookings = new ArrayList<>();
-        adapter = new BookingDetailsAdapter();
         rvBookingDetails.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         rvBookingDetails.setAdapter(adapter);
         queue = Volley.newRequestQueue(this);
@@ -95,6 +95,13 @@ public class CustomerActivity extends AppCompatActivity {
                 }, error -> Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show());
         queue.add(detailsRequest);
         queue.start();
+    }
 
+    @Override
+    public void onBookingDetailClick(int position) {
+        BookingDetailsEntity selectedBooking = bookings.get(position);
+        Intent intent = new Intent(this, BookingDetailsActivity.class);
+        intent.putExtra("booking", selectedBooking);
+        startActivity(intent);
     }
 }

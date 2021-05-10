@@ -1,9 +1,10 @@
 package com.example.threadedproj8androidapp.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
-public class BookingDetailsEntity {
+public class BookingDetailsEntity implements Serializable {
     private int bookingDetailId;
     private Double itineraryNo;
     private String tripStart;
