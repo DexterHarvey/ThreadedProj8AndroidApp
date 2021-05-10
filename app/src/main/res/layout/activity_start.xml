@@ -31,7 +31,7 @@
         app:srcCompat="@drawable/ic_login" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btnToSomewhere"
+        android:id="@+id/btnToMap"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|start"
