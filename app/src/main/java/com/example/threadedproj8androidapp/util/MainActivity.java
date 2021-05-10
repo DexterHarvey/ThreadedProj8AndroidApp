@@ -1,8 +1,7 @@
-package com.example.threadedproj8androidapp;
+package com.example.threadedproj8androidapp.util;
 
 import android.content.Intent;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -17,6 +16,10 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.threadedproj8androidapp.managers.CustomerManager;
+import com.example.threadedproj8androidapp.R;
+import com.example.threadedproj8androidapp.managers.URLManager;
+import com.example.threadedproj8androidapp.model.CustomerEntity;
 
 import org.json.JSONException;
 
@@ -53,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
                                 try {
                                     if (response.has("customerId"))
                                         try {
-                                            CustomerEntity customer = CustomerHandler.buildCustomer(response);
+                                            CustomerEntity customer = CustomerManager.buildCustomer(response);
                                             Intent intent = new Intent(getApplicationContext(), CustomerActivity.class);
                                             intent.putExtra("customer", (Serializable) customer);
                                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
