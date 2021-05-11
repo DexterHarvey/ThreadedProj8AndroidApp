@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -46,6 +47,7 @@ public class PackagesActivity extends FragmentActivity implements OnMapReadyCall
     private GoogleMap mMap;
     private ActivityMapsBinding mapsBinding;
     ListView listView;
+    Button btnDetails;
     RequestQueue queue;
 
     PackageEntity selectedPackage; // holder for last clicked package
@@ -58,6 +60,7 @@ public class PackagesActivity extends FragmentActivity implements OnMapReadyCall
         setContentView(mapsBinding.getRoot());
 
         listView = findViewById(R.id.packages_lvPackages);
+        btnDetails = findViewById(R.id.packages_btnDetails)
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -78,7 +81,9 @@ public class PackagesActivity extends FragmentActivity implements OnMapReadyCall
         });
 
         // todo: define button behaviour to go to new intent (with selected package data)
-
+        btnDetails.setOnClickListener(v -> {
+            Toast.makeText(this, "Todo: go to a package details activity", Toast.LENGTH_SHORT).show();
+        });
 
 
 
