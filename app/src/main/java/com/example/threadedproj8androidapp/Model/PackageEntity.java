@@ -1,18 +1,19 @@
 package com.example.threadedproj8androidapp.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
-public class PackageEntity {
+public class PackageEntity implements Serializable {
     private int packageId;
     private String pkgName;
     private Timestamp pkgStartDate;
     private Timestamp pkgEndDate;
     private String pkgDesc;
-    private BigDecimal pkgBasePrice;
-    private BigDecimal pkgAgencyCommission;
+    private Double pkgBasePrice;
+    private Double pkgAgencyCommission;
 
-    public PackageEntity(int packageId, String pkgName, Timestamp pkgStartDate, Timestamp pkgEndDate, String pkgDesc, BigDecimal pkgBasePrice, BigDecimal pkgAgencyCommission) {
+    public PackageEntity(int packageId, String pkgName, Timestamp pkgStartDate, Timestamp pkgEndDate, String pkgDesc, Double pkgBasePrice, Double pkgAgencyCommission) {
         this.packageId = packageId;
         this.pkgName = pkgName;
         this.pkgStartDate = pkgStartDate;
@@ -20,6 +21,10 @@ public class PackageEntity {
         this.pkgDesc = pkgDesc;
         this.pkgBasePrice = pkgBasePrice;
         this.pkgAgencyCommission = pkgAgencyCommission;
+    }
+
+    public PackageEntity() {
+
     }
 
     @Override
@@ -70,19 +75,17 @@ public class PackageEntity {
         this.pkgDesc = pkgDesc;
     }
 
-    public BigDecimal getPkgBasePrice() {
+    public double getPkgBasePrice() {
         return pkgBasePrice;
     }
 
-    public void setPkgBasePrice(BigDecimal pkgBasePrice) {
+    public void setPkgBasePrice(Double pkgBasePrice) {
         this.pkgBasePrice = pkgBasePrice;
     }
 
-    public BigDecimal getPkgAgencyCommission() {
-        return pkgAgencyCommission;
-    }
+    public double getPkgAgencyCommission() { return pkgAgencyCommission; }
 
-    public void setPkgAgencyCommission(BigDecimal pkgAgencyCommission) {
+    public void setPkgAgencyCommission(Double pkgAgencyCommission) {
         this.pkgAgencyCommission = pkgAgencyCommission;
     }
 }

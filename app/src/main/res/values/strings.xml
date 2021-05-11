@@ -32,4 +32,15 @@
     <string name="lblTotalCost">Total Cost:</string>
     <string name="btnEditCustomer">Edit</string>
     <string name="title_activity_maps">Map</string>
+    <string name="btnPurchase">PURCHASE</string>
+    <string name="title_activity_purchases">Purchase</string>
+    <string name="lblBDItineraryNo">Itinerary No:</string>
+    <string name="lblBDTripStart">Trip Start:</string>
+    <string name="lblBDTripEnd">Trip End:</string>
+    <string name="lblBDDescription">Description:</string>
+    <string name="lblBDDestination">Destination:</string>
+    <string name="lblBDTotalPrice">Price:</string>
+    <string name="lblNoOfTrav"># Of Travellers:</string>
+    <string name="lblConfirmPurchase">Confirm Purchase?</string>
+    <string name="btnPurchaseConfirm">Purchase</string>
 </resources>
