@@ -60,7 +60,7 @@ public class PackagesActivity extends FragmentActivity implements OnMapReadyCall
         setContentView(mapsBinding.getRoot());
 
         listView = findViewById(R.id.packages_lvPackages);
-        btnDetails = findViewById(R.id.packages_btnDetails)
+        btnDetails = findViewById(R.id.packages_btnDetails);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -103,10 +103,9 @@ public class PackagesActivity extends FragmentActivity implements OnMapReadyCall
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+        // Todo: set defauly map location, add options
 //        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
     }
 
     /**
@@ -136,7 +135,8 @@ public class PackagesActivity extends FragmentActivity implements OnMapReadyCall
                             PackageEntity pkg = gson.fromJson(response.getString(i), PackageEntity.class);
                             // Add the package to the listview adapter
                             arrayAdapter.add(pkg);
-                            // TODO: add a marker on map for the package. requires addition of LatLng to db
+                            // TODO: add a marker on map for the package. requires addition of LatLng to db.
+                            //  Add click listeners to select the current package
                             if(pkg.getPackageId() == 2){
                                 mMap.addMarker(new MarkerOptions()
                                     .position(new LatLng(23.8, -82.23))
