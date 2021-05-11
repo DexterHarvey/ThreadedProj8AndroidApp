@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.threadedproj8androidapp.MainActivity;
-import com.example.threadedproj8androidapp.MapsActivity;
+import com.example.threadedproj8androidapp.PackagesActivity;
 import com.example.threadedproj8androidapp.R;
 import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -52,7 +52,7 @@ public class StartActivity extends AppCompatActivity {
         binding.btnToMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), MapsActivity.class);
+                Intent intent = new Intent(getApplicationContext(), PackagesActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 getApplicationContext().startActivity(intent);
             }
