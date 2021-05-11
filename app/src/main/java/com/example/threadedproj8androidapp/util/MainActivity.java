@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
                                     if (response.has("customerId"))
                                         try {
                                             CustomerEntity customer = CustomerManager.buildCustomer(response);
-                                            Intent intent = new Intent(getApplicationContext(), CustomerActivity.class);
+                                            Intent intent = new Intent(getApplicationContext(), StartActivity.class);
                                             intent.putExtra("customer", (Serializable) customer);
                                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                             getApplicationContext().startActivity(intent);
