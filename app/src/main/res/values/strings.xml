@@ -30,4 +30,5 @@
     <string name="lblDescription">Description:</string>
     <string name="lblDestination">Destination:</string>
     <string name="lblTotalCost">Total Cost:</string>
+    <string name="btnEditCustomer">Edit</string>
 </resources>
