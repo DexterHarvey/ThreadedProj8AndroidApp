@@ -48,6 +48,7 @@ public class PackagesActivity extends FragmentActivity implements OnMapReadyCall
     ListView listView;
     RequestQueue queue;
 
+    PackageEntity selectedPackage; // holder for last clicked package
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,10 +69,15 @@ public class PackagesActivity extends FragmentActivity implements OnMapReadyCall
 
         Executors.newSingleThreadExecutor().execute(new GetPackages()); // see method for details
 
-        // This is just extra, no http request
+        // todo: Have it so that clicking a package sets a class variable to it,
+        //  to pass on to a Package Details intent on button press
         listView.setOnItemClickListener((parent, view, position, id) -> {
-            Toast.makeText(this, "test: " + position, Toast.LENGTH_SHORT).show();
+            selectedPackage = (PackageEntity) listView.getItemAtPosition(position);
+            // todo: highlight listview item, zoom to map position
+            Toast.makeText(this, "test: " + selectedPackage.getPkgName(), Toast.LENGTH_SHORT).show();
         });
+
+        // todo: define button behaviour to go to new intent (with selected package data)
 
 
 
@@ -94,11 +100,13 @@ public class PackagesActivity extends FragmentActivity implements OnMapReadyCall
 
         // Add a marker in Sydney and move the camera
         LatLng sydney = new LatLng(-34, 151);
-        LatLng havana = new LatLng(23.8, -82.23);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.addMarker(new MarkerOptions().position(havana).title("Marker in Havana"));
 //        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
+
+    /**
+     * Gets all package data from API and loads it into the listview.
+     */
     private class GetPackages implements Runnable {
         @Override
         public void run() {
@@ -109,15 +117,26 @@ public class PackagesActivity extends FragmentActivity implements OnMapReadyCall
                     new Response.Listener<JSONArray>() {
                 @Override
                 public void onResponse(JSONArray response) {
+                    // Create an array adapter for incoming listview data
                     ArrayAdapter<PackageEntity> arrayAdapter = new ArrayAdapter<PackageEntity>(getApplicationContext(), android.R.layout.simple_list_item_1);
                     try {
+                        // Date parsing is a real delight. We need a custom GSON object to handle the incoming date strings.
+                        //TODO: my bugvision suggests this might mess up if ever packages get added with differently formatted dates in the javafx app...
                         GsonBuilder gsonBuilder = new GsonBuilder();
                         gsonBuilder.setDateFormat("MMM dd, yyyy, HH:mm:ss aaa");
                         Gson gson = gsonBuilder.create();
                         // Use Gson to pull out each JsonObject and add it to adapter
                         for(int i = 0; i< response.length(); i++){
+                            // Grab the current Package object from the array
                             PackageEntity pkg = gson.fromJson(response.getString(i), PackageEntity.class);
+                            // Add the package to the listview adapter
                             arrayAdapter.add(pkg);
+                            // TODO: add a marker on map for the package. requires addition of LatLng to db
+                            if(pkg.getPackageId() == 2){
+                                mMap.addMarker(new MarkerOptions()
+                                    .position(new LatLng(23.8, -82.23))
+                                    .title(pkg.getPkgName()));
+                            }
                         }
                         // We're in an async thread, and to edit the UI in such a place, we need to use the UI thread.
                         runOnUiThread(new Runnable() {
