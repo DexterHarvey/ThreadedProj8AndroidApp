@@ -49,6 +49,9 @@ public class MainActivity extends AppCompatActivity {
 
                 if (inputUsername.isEmpty() || inputPassword.isEmpty()) {
                     Toast.makeText(MainActivity.this, "Please enter a username and password", Toast.LENGTH_SHORT).show();
+                    // todo: remove these two lines! just a development speedup
+                    txtUsername.setText("lenison");
+                    txtPassword.setText("example123");
                 } else {
                     // Request a string response from the provided URL.
                     JsonObjectRequest custRequest = new JsonObjectRequest(Request.Method.GET, URLManager.getLoginURL(inputUsername, inputPassword), null,
