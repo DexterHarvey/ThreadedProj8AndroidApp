@@ -49,6 +49,9 @@ public class MainActivity extends AppCompatActivity {
 
                 if (inputUsername.isEmpty() || inputPassword.isEmpty()) {
                     Toast.makeText(MainActivity.this, "Please enter a username and password", Toast.LENGTH_SHORT).show();
+                    // todo: remove these two lines! just a development speedup
+                    txtUsername.setText("lenison");
+                    txtPassword.setText("example123");
                 } else {
                     // Request a string response from the provided URL.
                     JsonObjectRequest custRequest = new JsonObjectRequest(Request.Method.GET, URLManager.getLoginURL(inputUsername, inputPassword), null,
@@ -57,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
                                     if (response.has("customerId"))
                                         try {
                                             CustomerEntity customer = CustomerManager.buildCustomer(response);
-                                            Intent intent = new Intent(getApplicationContext(), CustomerActivity.class);
+                                            Intent intent = new Intent(getApplicationContext(), StartActivity.class);
                                             intent.putExtra("customer", (Serializable) customer);
                                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                             getApplicationContext().startActivity(intent);
