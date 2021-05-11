@@ -24,5 +24,12 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="lblItineraryNo">Itinerary Number:</string>
+    <string name="lblTripStart">Trip Start:</string>
+    <string name="lblTripEnd">Trip End Date:</string>
+    <string name="lblDescription">Description:</string>
+    <string name="lblDestination">Destination:</string>
+    <string name="lblTotalCost">Total Cost:</string>
+    <string name="btnEditCustomer">Edit</string>
     <string name="title_activity_maps">Map</string>
 </resources>

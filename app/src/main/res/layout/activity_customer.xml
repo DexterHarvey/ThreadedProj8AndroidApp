@@ -245,6 +245,13 @@
             android:layout_weight="1" />
     </TableRow>
 
+    <Button
+        android:id="@+id/btnEditCustomer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btnEditCustomer"
+        android:layout_gravity="center_horizontal"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvBookingDetails"
         android:layout_width="match_parent"

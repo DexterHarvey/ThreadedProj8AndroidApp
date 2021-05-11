@@ -54,8 +54,12 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".util.CustomerActivity" />
-        <activity android:name=".util.BookingDetailsActivity" />
+        <activity
+            android:name=".util.CustomerActivity"
+            android:theme="@style/Theme.ThreadedProj8AndroidApp.NoActionBar"/>
+        <activity
+            android:name=".util.BookingDetailsActivity"
+            android:theme="@style/Theme.ThreadedProj8AndroidApp..Translucent"/>
     </application>
 
 </manifest>
