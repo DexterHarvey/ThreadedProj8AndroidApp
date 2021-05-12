@@ -56,10 +56,11 @@ public class PurchaseActivity extends AppCompatActivity {
     TextView lblBDDescriptionValue;
     TextView lblBDDestinationValue;
     TextView lblBDTotalPriceValue;
-    TextView lblNoOfTravValue;
     Spinner ddlClassId;
+    Spinner ddlNoOfTravelers;
     Button btnPurchaseConfirm;
     RequestQueue queue;
+    Integer[] travellers = {1, 2, 3, 4, 5, 6};
     String[] classes = {"BSN", "DBL", "DLX", "ECN", "FST", "INT", "OCNV", "SNG"};
 
     @Override
@@ -75,11 +76,13 @@ public class PurchaseActivity extends AppCompatActivity {
         lblBDDescriptionValue = findViewById(R.id.lblBDDescriptionValue);
         lblBDDestinationValue = findViewById(R.id.lblBDDestinationValue);
         lblBDTotalPriceValue = findViewById(R.id.lblBDTotalPriceValue);
-        lblNoOfTravValue = findViewById(R.id.lblNoOfTravValue);
         ddlClassId = findViewById(R.id.ddlClassId);
+        ddlNoOfTravelers = findViewById(R.id.ddlNoOfTravelers);
         btnPurchaseConfirm = findViewById(R.id.btnPurchaseConfirm);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, classes);
-        ddlClassId.setAdapter(adapter);
+        ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(this, android.R.layout.simple_spinner_dropdown_item, travellers);
+        ddlNoOfTravelers.setAdapter(adapter);
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, classes);
+        ddlClassId.setAdapter(adapter1);
         char bookNo1 = (char)(rand.nextInt(26) + 'A');
         char bookNo2 = (char)(rand.nextInt(26) + 'A');
         char bookNo3 = (char)(rand.nextInt(26) + 'A');
@@ -91,8 +94,6 @@ public class PurchaseActivity extends AppCompatActivity {
         randomIntineraryNoDouble = randomItineraryNo;
         customer = (CustomerEntity) intent.getSerializableExtra("customer");
         packageEntity = (PackageEntity) intent.getSerializableExtra("package");
-        numberOfTravellers = intent.getIntExtra("numberOfTravellers", 0);
-        numberOfTravellersDouble = numberOfTravellers;
         Date date = new Date();
         Timestamp time = new Timestamp(date.getTime());
         booking.setBookingDate(time);
@@ -119,12 +120,14 @@ public class PurchaseActivity extends AppCompatActivity {
         lblBDDescriptionValue.setText(bookingDetails.getDescription());
         lblBDDestinationValue.setText(bookingDetails.getDestination());
         lblBDTotalPriceValue.setText(String.valueOf((bookingDetails.getBasePrice() + bookingDetails.getAgencyCommission())) + "$");
-        lblNoOfTravValue.setText(String.valueOf(numberOfTravellers));
         JSONObject bookingJSON = BookingsManager.buildJSONFromBooking(booking);
         btnPurchaseConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 bookingDetails.setClassId((String) ddlClassId.getSelectedItem());
+                numberOfTravellers = (Integer) ddlNoOfTravelers.getSelectedItem();
+                numberOfTravellersDouble = numberOfTravellers;
+                booking.setTravelerCount(numberOfTravellersDouble);
                 ArrayList<BookingEntity> bookingEntities = new ArrayList<>();
                 queue = Volley.newRequestQueue(getApplicationContext());
                 JsonObjectRequest bookingPost = new JsonObjectRequest(Request.Method.POST, URLManager.getBookingsPostURL(), bookingJSON,
