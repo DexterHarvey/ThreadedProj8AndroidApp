@@ -21,6 +21,9 @@ import java.io.Serializable;
 
 public class StartActivity extends AppCompatActivity {
 
+    // HI JETLYN
+
+
     private AppBarConfiguration appBarConfiguration;
     private ActivityStartBinding binding;
 
