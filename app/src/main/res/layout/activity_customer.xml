@@ -1,339 +1,359 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginTop="10dp"
-    android:layout_marginBottom="10dp"
-    android:orientation="vertical"
-    >
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
-        android:text="Update Your Info"
-        android:textAlignment="center"
-        android:textColor="#0045cf"
-        android:textSize="24sp"
-        android:textStyle="bold" />
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="263dp"
-        android:elevation="2dp"
-        android:background="@android:drawable/dialog_holo_light_frame"
-        >
+        <Space
+            android:layout_width="416dp"
+            android:layout_height="11dp" />
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:orientation="vertical">
+            android:layout_marginBottom="5dp"
+            android:text="Update Your Info"
+            android:textAlignment="center"
+            android:textColor="#0045cf"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
-            <TableRow
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="263dp"
+            android:background="@android:drawable/dialog_holo_light_frame"
+            android:elevation="2dp">
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/lblCustFName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/lblCustFName"
-                    android:textAlignment="center" />
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                <EditText
-                    android:id="@+id/txtCustFName"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:inputType="textPersonName" />
+                    <TextView
+                        android:id="@+id/lblCustFName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/lblCustFName"
+                        android:textAlignment="center" />
 
-            </TableRow>
+                    <EditText
+                        android:id="@+id/txtCustFName"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:backgroundTint=" #ff9933"
+                        android:ems="10"
+                        android:inputType="textPersonName" />
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                </TableRow>
 
-                <TextView
-                    android:id="@+id/lblCustLastName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/lblCustLName"
-                    android:textAlignment="center" />
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                <EditText
-                    android:id="@+id/txtCustLName"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:inputType="textPersonName" />
-            </TableRow>
+                    <TextView
+                        android:id="@+id/lblCustLastName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/lblCustLName"
+                        android:textAlignment="center" />
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                    <EditText
+                        android:id="@+id/txtCustLName"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:backgroundTint=" #ff9933"
+                        android:ems="10"
+                        android:inputType="textPersonName" />
+                </TableRow>
 
-                <TextView
-                    android:id="@+id/lblCustAddress"
-                    android:layout_width="72dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/lblCustAddress"
-                    android:textAlignment="center" />
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                <EditText
-                    android:id="@+id/txtCustAddress"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:inputType="textPersonName" />
-            </TableRow>
+                    <TextView
+                        android:id="@+id/lblCustAddress"
+                        android:layout_width="72dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/lblCustAddress"
+                        android:textAlignment="center" />
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                    <EditText
+                        android:id="@+id/txtCustAddress"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:backgroundTint=" #ff9933"
+                        android:ems="10"
+                        android:inputType="textPersonName" />
+                </TableRow>
 
-                <TextView
-                    android:id="@+id/lblCustCity"
-                    android:layout_width="74dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/lblCustCity"
-                    android:textAlignment="center" />
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                <EditText
-                    android:id="@+id/txtCustCity"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:width="200dp"
-                    android:ems="10"
-                    android:inputType="textPersonName" />
-            </TableRow>
+                    <TextView
+                        android:id="@+id/lblCustCity"
+                        android:layout_width="74dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/lblCustCity"
+                        android:textAlignment="center" />
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                    <EditText
+                        android:id="@+id/txtCustCity"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:width="200dp"
+                        android:backgroundTint=" #ff9933"
+                        android:ems="10"
+                        android:inputType="textPersonName" />
+                </TableRow>
 
-                <TextView
-                    android:id="@+id/lblCustProv"
-                    android:layout_width="73dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/lblCustProv"
-                    android:textAlignment="center" />
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                <EditText
-                    android:id="@+id/txtCustProvince"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:inputType="textPersonName" />
-            </TableRow>
+                    <TextView
+                        android:id="@+id/lblCustProv"
+                        android:layout_width="73dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/lblCustProv"
+                        android:textAlignment="center" />
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                    <EditText
+                        android:id="@+id/txtCustProvince"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:backgroundTint=" #ff9933"
+                        android:ems="10"
+                        android:inputType="textPersonName" />
+                </TableRow>
 
-                <TextView
-                    android:id="@+id/lblCustPostalCode"
-                    android:layout_width="82dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/lblCustPostal"
-                    android:textAlignment="center" />
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                <EditText
-                    android:id="@+id/txtCustPostalCode"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:inputType="textPersonName" />
-            </TableRow>
+                    <TextView
+                        android:id="@+id/lblCustPostalCode"
+                        android:layout_width="82dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/lblCustPostal"
+                        android:textAlignment="center" />
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                    <EditText
+                        android:id="@+id/txtCustPostalCode"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:backgroundTint=" #ff9933"
+                        android:ems="10"
+                        android:inputType="textPersonName" />
+                </TableRow>
 
-                <TextView
-                    android:id="@+id/lblCustCountry"
-                    android:layout_width="82dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/lblCustCountry"
-                    android:textAlignment="center" />
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                <EditText
-                    android:id="@+id/txtCustCountry"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:inputType="textPersonName" />
-            </TableRow>
+                    <TextView
+                        android:id="@+id/lblCustCountry"
+                        android:layout_width="82dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/lblCustCountry"
+                        android:textAlignment="center" />
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                    <EditText
+                        android:id="@+id/txtCustCountry"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:backgroundTint=" #ff9933"
+                        android:ems="10"
+                        android:inputType="textPersonName" />
+                </TableRow>
 
-                <TextView
-                    android:id="@+id/lblCustHomePhone"
-                    android:layout_width="83dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/lblCustHomePhone"
-                    android:textAlignment="center" />
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                <EditText
-                    android:id="@+id/txtCustHomePhone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:inputType="textPersonName" />
-            </TableRow>
+                    <TextView
+                        android:id="@+id/lblCustHomePhone"
+                        android:layout_width="83dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/lblCustHomePhone"
+                        android:textAlignment="center" />
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                    <EditText
+                        android:id="@+id/txtCustHomePhone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:backgroundTint=" #ff9933"
+                        android:ems="10"
+                        android:inputType="textPersonName" />
+                </TableRow>
 
-                <TextView
-                    android:id="@+id/lblCustBusPhone"
-                    android:layout_width="83dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/lblCustBusPhone"
-                    android:textAlignment="center" />
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                <EditText
-                    android:id="@+id/txtCustBusPhone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:inputType="textPersonName" />
-            </TableRow>
+                    <TextView
+                        android:id="@+id/lblCustBusPhone"
+                        android:layout_width="83dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/lblCustBusPhone"
+                        android:textAlignment="center" />
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                    <EditText
+                        android:id="@+id/txtCustBusPhone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:backgroundTint=" #ff9933"
+                        android:ems="10"
+                        android:inputType="textPersonName" />
+                </TableRow>
 
-                <TextView
-                    android:id="@+id/lblCustEmail"
-                    android:layout_width="82dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/lblCustEmail"
-                    android:textAlignment="center" />
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                <EditText
-                    android:id="@+id/txtCustEmail"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:inputType="textPersonName" />
-            </TableRow>
+                    <TextView
+                        android:id="@+id/lblCustEmail"
+                        android:layout_width="82dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/lblCustEmail"
+                        android:textAlignment="center" />
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:gravity="center_vertical">
+                    <EditText
+                        android:id="@+id/txtCustEmail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:backgroundTint=" #ff9933"
+                        android:ems="10"
+                        android:inputType="textPersonName" />
+                </TableRow>
 
-                <TextView
-                    android:id="@+id/lblCustUsername"
-                    android:layout_width="8dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:text="@string/lblCustUsername"
-                    android:textAlignment="center" />
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:gravity="center_vertical">
 
-                <TextView
-                    android:id="@+id/lblUsernameValue"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-            </TableRow>
+                    <TextView
+                        android:id="@+id/lblCustUsername"
+                        android:layout_width="8dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:text="@string/lblCustUsername"
+                        android:textAlignment="center" />
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:gravity="center_vertical">
+                    <TextView
+                        android:id="@+id/lblUsernameValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+                </TableRow>
 
-                <TextView
-                    android:id="@+id/lblCustPassword"
-                    android:layout_width="7dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:text="@string/lblCustPassword"
-                    android:textAlignment="center" />
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:gravity="center_vertical">
 
-                <TextView
-                    android:id="@+id/lblPasswordValue"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-            </TableRow>
-        </LinearLayout>
-    </ScrollView>
+                    <TextView
+                        android:id="@+id/lblCustPassword"
+                        android:layout_width="7dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:text="@string/lblCustPassword"
+                        android:textAlignment="center" />
 
-    <Button
-        android:id="@+id/btnEditCustomer"
-        android:layout_width="110dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
-        android:backgroundTint="#ff9933"
-        android:text="@string/btnEditCustomer"
-        android:textColor="@color/white" />
+                    <TextView
+                        android:id="@+id/lblPasswordValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+                </TableRow>
+            </LinearLayout>
+        </ScrollView>
 
-    <View
-        android:id="@+id/divider"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:background="?android:attr/listDivider" />
+        <Button
+            android:id="@+id/btnEditCustomer"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="#ff9933"
+            android:text="@string/btnEditCustomer"
+            android:textColor="@color/white" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:text="Booking History"
-        android:textAlignment="center"
-        android:textColor="#0045cf"
-        android:textSize="24sp"
-        android:textStyle="bold" />
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="?android:attr/listDivider" />
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@android:drawable/dialog_holo_light_frame"
-        >
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:orientation="vertical">
+            android:layout_marginBottom="10dp"
+            android:text="Booking History"
+            android:textAlignment="center"
+            android:textColor="#0045cf"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvBookingDetails"
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:drawable/dialog_holo_light_frame">
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </LinearLayout>
-    </ScrollView>
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:orientation="vertical">
 
-</LinearLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvBookingDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

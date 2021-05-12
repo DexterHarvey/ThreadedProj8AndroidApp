@@ -6,13 +6,13 @@
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="27dp" />
+        android:layout_height="17dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:gravity="center_vertical"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:paddingLeft="10dp"
         android:paddingRight="10dp">
 
@@ -39,7 +39,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:gravity="center_vertical"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:paddingLeft="10dp"
         android:paddingRight="10dp">
 
@@ -109,7 +109,7 @@
 
         <TextView
             android:id="@+id/lblBDDescriptionValue"
-            android:layout_width="100dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textColor="@color/black"
@@ -136,7 +136,7 @@
 
         <TextView
             android:id="@+id/lblBDDestinationValue"
-            android:layout_width="100dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textColor="@color/black"
@@ -197,13 +197,13 @@
             android:textSize="16sp" />
     </LinearLayout>
 
-    <TableRow
+    <Space
         android:layout_width="match_parent"
-        android:layout_height="219dp" />
+        android:layout_height="44dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="38dp"
         android:gravity="center"
         android:orientation="vertical">
 
