@@ -20,7 +20,7 @@
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="4dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/ddlNoOfTravellers"
+                app:layout_constraintEnd_toStartOf="@+id/ddlClassId"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -33,14 +33,14 @@
                 android:layout_marginStart="12dp"
                 android:layout_marginBottom="6dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/ddlNoOfTravellers"
+                app:layout_constraintEnd_toStartOf="@+id/ddlClassId"
                 app:layout_constraintHorizontal_bias="0.8"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.756" />
 
             <Spinner
-                android:id="@+id/ddlNoOfTravellers"
+                android:id="@+id/ddlClassId"
                 android:layout_width="78dp"
                 android:layout_height="26dp"
                 android:layout_marginStart="10dp"

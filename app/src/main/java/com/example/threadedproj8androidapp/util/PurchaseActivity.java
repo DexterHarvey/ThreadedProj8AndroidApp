@@ -36,6 +36,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
+import java.util.concurrent.Executors;
 
 public class PurchaseActivity extends AppCompatActivity {
     CustomerEntity customer = new CustomerEntity();
@@ -99,18 +100,8 @@ public class PurchaseActivity extends AppCompatActivity {
         bookingDetails.setDestination(packageEntity.getPkgName());
         bookingDetails.setBasePrice(packageEntity.getPkgBasePrice());
         bookingDetails.setAgencyCommission(packageEntity.getPkgAgencyCommission());
-        if(packageEntity.getPackageId() == 1){
-            bookingDetails.setRegionId("OTHR");
-        } else if (packageEntity.getPackageId() == 2) {
-
-        }
-        else if (packageEntity.getPackageId() == 3) {
-
-        }
-        else if (packageEntity.getPackageId() == 4) {
-
-        }
         bookingDetails.setClassId(TODO);
+        bookingDetails.setFeeId("BK");
         double itinNo = bookingDetails.getItineraryNo();
         int itinNoInt = (int) itinNo;
         lblBDItineraryNoValue.setText(String.valueOf(itinNoInt));
@@ -133,27 +124,40 @@ public class PurchaseActivity extends AppCompatActivity {
                                 try {
                                 BookingEntity returnedBooking = BookingsManager.buildBooking(response);
                                 bookingEntities.add(returnedBooking);
+                                bookingDetails.setBookingId(bookingEntities.get(0).getBookingId());
+
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
+                                Executors.newSingleThreadExecutor().execute(new PurchaseActivity.POSTBookingDetails());
                             }
                         }, error -> Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show());
                 queue.add(bookingPost);
                 queue.start();
-                bookingDetails.setBookingId(bookingEntities.get(0).getBookingId());
-                JsonObjectRequest bookingDetailPost = new JsonObjectRequest(Request.Method.POST, URLManager.getBookingDetailsPostURL(), bookingJSON,
-                        new Response.Listener<JSONObject>() {
-                            @Override
-                            public void onResponse(JSONObject response) {
-                                try {
-                                    BookingEntity returnedBooking = BookingsManager.buildBooking(response);
-                                    bookingEntities.add(returnedBooking);
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        }, error -> Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show());
+
+
             }
         });
+    }
+    public class POSTBookingDetails implements Runnable {
+
+        @Override
+        public void run() {
+            JSONObject bookingDetailsJSON = BookingDetailsManager.buildJSONFromBookingDetails(bookingDetails);
+            JsonObjectRequest bookingDetailPost = new JsonObjectRequest(Request.Method.POST, URLManager.getBookingDetailsPostURL(), bookingDetailsJSON,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try {
+                                BookingDetailsEntity test = BookingDetailsManager.buildBookingDetails(response);
+                                Intent intent = new Intent(getApplicationContext(), StartActivity.class);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                                Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show());
+                            }
+                        }
+                    }, error -> Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show());
+            queue.add(bookingDetailPost);
+        }
     }
 }

@@ -12,7 +12,7 @@
         android:paddingRight="10dp">
 
         <TextView
-            android:id="@+id/lblBDItineraryNo"
+            android:id="@+id/lblDBItineraryNo"
             android:layout_width="7dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
@@ -81,14 +81,14 @@
 
     <TableRow
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:gravity="center_vertical"
         android:paddingLeft="10dp"
         android:paddingRight="10dp">
 
         <TextView
             android:id="@+id/lblBDDescription"
-            android:layout_width="7dp"
+            android:layout_width="58dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:text="@string/lblBDDescription"
@@ -113,7 +113,7 @@
 
         <TextView
             android:id="@+id/lblBDDestination"
-            android:layout_width="7dp"
+            android:layout_width="59dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:text="@string/lblBDDestination"
@@ -176,6 +176,30 @@
             android:layout_weight="1"
             android:textSize="16sp"
             android:textColor="@color/black"/>
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <TextView
+            android:id="@+id/lblClassId"
+            android:layout_width="136dp"
+            android:layout_height="wrap_content"
+            android:text="@string/lblClassId"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+        <Spinner
+            android:id="@+id/ddlClassId"
+            android:layout_width="78dp"
+            android:layout_height="26dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:dropDownWidth="50dp"
+            android:minWidth="50dp"/>
     </TableRow>
 
     <TableRow
