@@ -57,6 +57,7 @@ public class PackagesAdapter extends RecyclerView.Adapter<PackagesAdapter.Packag
     @Override
     public void onBindViewHolder(@NotNull PackagesViewHolder holder, int position) {
         PackageEntity packageEntity = packages.get(position);
+        holder.lblPackageName.setText(packageEntity.getPkgName());
         holder.lblPackageDescription.setText(packageEntity.getPkgDesc());
         holder.lblPackageStartDate.setText(String.valueOf(packageEntity.getPkgStartDate()));
         holder.packageEntity = packageEntity;
@@ -93,6 +94,7 @@ public class PackagesAdapter extends RecyclerView.Adapter<PackagesAdapter.Packag
     public class PackagesViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView lblPackageDescription;
         TextView lblPackageStartDate;
+        TextView lblPackageName;
         View rootView;
         Spinner ddlNoOfTravelers;
         Integer[] travellers = new Integer[]{0, 1, 2, 3, 4, 5};
@@ -104,6 +106,7 @@ public class PackagesAdapter extends RecyclerView.Adapter<PackagesAdapter.Packag
         public PackagesViewHolder(@NotNull View itemView, OnItemClicked onItmCLk) {
             super(itemView);
             rootView = itemView;
+            lblPackageName = itemView.findViewById(R.id.lblPackageName);
             lblPackageDescription = itemView.findViewById(R.id.lblPackageDescription);
             lblPackageStartDate = itemView.findViewById(R.id.lblPackageStartDate);
             ddlNoOfTravelers = itemView.findViewById(R.id.ddlClassId);

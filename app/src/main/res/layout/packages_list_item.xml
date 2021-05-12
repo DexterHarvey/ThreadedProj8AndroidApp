@@ -11,45 +11,57 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="66dp">
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp">
 
-            <TextView
-                android:id="@+id/lblPackageDescription"
-                android:layout_width="200dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="4dp"
+            <LinearLayout
+                android:layout_width="210dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/ddlClassId"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.026" />
+                app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/lblPackageStartDate"
-                android:layout_width="200dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="12dp"
-                android:layout_marginBottom="6dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/ddlClassId"
-                app:layout_constraintHorizontal_bias="0.8"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.756" />
+                <TextView
+                    android:id="@+id/lblPackageName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="4dp"
+                    android:text="Package Name"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/lblPackageDescription"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="4dp"
+                    android:text="A short description goes here." />
+
+                <TextView
+                    android:id="@+id/lblPackageStartDate"
+                    android:layout_width="200dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginBottom="6dp"
+                    android:text="Start date 23 343 235 " />
+            </LinearLayout>
 
             <Spinner
                 android:id="@+id/ddlClassId"
                 android:layout_width="78dp"
                 android:layout_height="26dp"
-                android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:dropDownWidth="50dp"
                 android:minWidth="50dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/btnPurchase"
-                app:layout_constraintStart_toEndOf="@+id/lblPackageStartDate"
+                app:layout_constraintHorizontal_bias="0.995"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:visibility="visible" />
 

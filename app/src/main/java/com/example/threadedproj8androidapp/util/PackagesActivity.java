@@ -110,7 +110,10 @@ public class PackagesActivity extends FragmentActivity implements OnMapReadyCall
                 coordsCounter ++;
             }
         }
-
+        //Special case if NO destinations - just pass over this to prevent crashing!
+        if(coordsCounter == 0){
+            return;
+        }
         // Special case if just one set of coords - just go to it
         if (coordsCounter == 1) {
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentCoords, 8));
