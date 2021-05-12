@@ -19,7 +19,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/ddlNoOfTravellers"
+                app:layout_constraintEnd_toStartOf="@+id/ddlClassId"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -52,7 +52,7 @@
             </LinearLayout>
 
             <Spinner
-                android:id="@+id/ddlNoOfTravellers"
+                android:id="@+id/ddlClassId"
                 android:layout_width="78dp"
                 android:layout_height="26dp"
                 android:layout_marginEnd="10dp"

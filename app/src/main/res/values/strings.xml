@@ -46,4 +46,5 @@
     <string name="lblRegister"><u>No account? Click here to register.</u></string>
     <string name="btnRegisterCustomer">Register</string>
     <string name="switchRememberMe">Remember me:</string>
+    <string name="lblClassId">Seating class:</string>
 </resources>

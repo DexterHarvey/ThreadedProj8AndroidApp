@@ -2,13 +2,14 @@ package com.example.threadedproj8androidapp.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.sql.Time;
 import java.sql.Timestamp;
 
 public class BookingDetailsEntity implements Serializable {
     private int bookingDetailId;
     private Double itineraryNo;
-    private String tripStart;
-    private String tripEnd;
+    private Timestamp tripStart;
+    private Timestamp tripEnd;
     private String description;
     private String destination;
     private double basePrice;
@@ -35,19 +36,19 @@ public class BookingDetailsEntity implements Serializable {
         this.itineraryNo = itineraryNo;
     }
 
-    public String getTripStart() {
+    public Timestamp getTripStart() {
         return tripStart;
     }
 
-    public void setTripStart(String tripStart) {
+    public void setTripStart(Timestamp tripStart) {
         this.tripStart = tripStart;
     }
 
-    public String getTripEnd() {
+    public Timestamp getTripEnd() {
         return tripEnd;
     }
 
-    public void setTripEnd(String tripEnd) {
+    public void setTripEnd(Timestamp tripEnd) {
         this.tripEnd = tripEnd;
     }
 
