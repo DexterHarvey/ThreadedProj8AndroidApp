@@ -2,7 +2,6 @@ package com.example.threadedproj8androidapp.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +30,7 @@ public class PackagesAdapter extends RecyclerView.Adapter<PackagesAdapter.Packag
 
     //declare interface
     private OnItemClicked onClick;
+    private PackagesViewHolder viewHolder;
 
     //make interface like this
     public interface OnItemClicked {
@@ -49,7 +49,7 @@ public class PackagesAdapter extends RecyclerView.Adapter<PackagesAdapter.Packag
     @Override
     public PackagesViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.packages_list_item, parent, false);
-        PackagesViewHolder viewHolder = new PackagesViewHolder(view, onClick);
+        viewHolder = new PackagesViewHolder(view, onClick);
         viewHolder.customer = customer;
         return viewHolder;
     }
@@ -81,12 +81,16 @@ public class PackagesAdapter extends RecyclerView.Adapter<PackagesAdapter.Packag
         return this.packages.size();
     }
 
+    public PackagesViewHolder getViewHolder() {
+        return viewHolder;
+    }
+
     public void setOnClick(OnItemClicked onClick)
     {
         this.onClick=onClick;
     }
 
-    class PackagesViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class PackagesViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView lblPackageDescription;
         TextView lblPackageStartDate;
         View rootView;
@@ -127,6 +131,10 @@ public class PackagesAdapter extends RecyclerView.Adapter<PackagesAdapter.Packag
                 }
             });
 
+        }
+
+        public View getRootView() {
+            return rootView;
         }
 
         @Override

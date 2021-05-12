@@ -33,6 +33,7 @@ import com.example.threadedproj8androidapp.databinding.ActivityMapsBinding;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -92,6 +93,7 @@ public class PackagesActivity extends FragmentActivity implements OnMapReadyCall
     // On package click, we zoom to the coords in that package
     @Override
     public void onItemClick(int position) {
+
         // Grab id from adapter based on click position
         int pkgID = adapter.getPackages().get(position).getPackageId();
 
@@ -204,7 +206,7 @@ public class PackagesActivity extends FragmentActivity implements OnMapReadyCall
                                             // Add the marker
                                             mMap.addMarker(new MarkerOptions()
                                                     .position(new LatLng(coordsSet.getLatitude(), coordsSet.getLongitude()))
-                                                    .title(coordsSet.getName())
+                                                    .title(coordsSet.getName() + " - " + pkg.getPkgName())
                                                     .snippet(coordsSet.getDescription())
                                                     .icon(BitmapDescriptorFactory.defaultMarker(randomColorVal)));
 
