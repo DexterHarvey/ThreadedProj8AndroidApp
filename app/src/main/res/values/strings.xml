@@ -47,4 +47,5 @@
     <string name="btnRegisterCustomer">Register</string>
     <string name="switchRememberMe">Remember me:</string>
     <string name="lblClassId">Seating class:</string>
+    <string name="btnLogout">logout</string>
 </resources>

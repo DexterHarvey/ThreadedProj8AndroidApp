@@ -48,6 +48,12 @@ public class MainActivity extends AppCompatActivity {
         preferences = getSharedPreferences("PREFERENCES", MODE_PRIVATE);
         editor = preferences.edit();
         switchRememberMe = findViewById(R.id.switchRememberMe);
+        Intent intent = getIntent();
+        if (intent.getBooleanExtra("isLogout", false)) {
+            editor.remove("USERNAME").commit();
+            editor.remove("PASSWORD").commit();
+            switchRememberMe.setChecked(false);
+        }
         txtUsername = findViewById(R.id.txtUsername);
         txtPassword = findViewById(R.id.txtPassword);
         btnLogin = findViewById(R.id.btnLogin);
@@ -61,11 +67,12 @@ public class MainActivity extends AppCompatActivity {
                     response -> {
                         if (response.has("customerId"))
                             try {
+                                switchRememberMe.setChecked(true);
                                 CustomerEntity customer = CustomerManager.buildCustomer(response);
-                                Intent intent = new Intent(getApplicationContext(), StartActivity.class);
-                                intent.putExtra("customer", (Serializable) customer);
-                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                getApplicationContext().startActivity(intent);
+                                Intent intent1 = new Intent(getApplicationContext(), StartActivity.class);
+                                intent1.putExtra("customer", (Serializable) customer);
+                                intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                getApplicationContext().startActivity(intent1);
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
