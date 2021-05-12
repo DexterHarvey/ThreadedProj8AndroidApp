@@ -1,12 +1,17 @@
 package com.example.threadedproj8androidapp.util;
 
+import android.content.Context;
 import android.content.Intent;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,23 +29,50 @@ import com.example.threadedproj8androidapp.model.CustomerEntity;
 import org.json.JSONException;
 
 public class MainActivity extends AppCompatActivity {
+
+    private SharedPreferences preferences;
+    private SharedPreferences.Editor editor;
+
     EditText txtUsername;
     EditText txtPassword;
     Button btnLogin;
     TextView lblAttemptInfo;
+    TextView lblRegister;
+    Switch switchRememberMe;
     RequestQueue queue;
-    String url = "http://10.0.2.2:8080/RESTApiForAndroid_war_exploded/api/customers/getlogin/lenison/example123";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        preferences = getSharedPreferences("PREFERENCES", MODE_PRIVATE);
+        editor = preferences.edit();
+        switchRememberMe = findViewById(R.id.switchRememberMe);
         txtUsername = findViewById(R.id.txtUsername);
         txtPassword = findViewById(R.id.txtPassword);
         btnLogin = findViewById(R.id.btnLogin);
         lblAttemptInfo = findViewById(R.id.lblAttemptInfo);
+        lblRegister = findViewById(R.id.lblRegister);
         queue = Volley.newRequestQueue(getApplicationContext());
+        String savedUsername = preferences.getString("USERNAME", "");
+        String savedPassword = preferences.getString("PASSWORD", "");
+        if(!savedUsername.equals("") && !savedPassword.equals("")) {
+            JsonObjectRequest custRequest = new JsonObjectRequest(Request.Method.GET, URLManager.getLoginURL(savedUsername, savedPassword), null,
+                    response -> {
+                        if (response.has("customerId"))
+                            try {
+                                CustomerEntity customer = CustomerManager.buildCustomer(response);
+                                Intent intent = new Intent(getApplicationContext(), StartActivity.class);
+                                intent.putExtra("customer", (Serializable) customer);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                getApplicationContext().startActivity(intent);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                    }, error -> Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show());
+            queue.start();
+            queue.add(custRequest);
+        }
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,27 +85,66 @@ public class MainActivity extends AppCompatActivity {
                     txtUsername.setText("lenison");
                     txtPassword.setText("example123");
                 } else {
-                    // Request a string response from the provided URL.
-                    JsonObjectRequest custRequest = new JsonObjectRequest(Request.Method.GET, URLManager.getLoginURL(inputUsername, inputPassword), null,
-                            response -> {
-                                try {
-                                    if (response.has("customerId"))
-                                        try {
-                                            CustomerEntity customer = CustomerManager.buildCustomer(response);
-                                            Intent intent = new Intent(getApplicationContext(), StartActivity.class);
-                                            intent.putExtra("customer", (Serializable) customer);
-                                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                            getApplicationContext().startActivity(intent);
-                                        } catch (JSONException e) {
-                                            e.printStackTrace();
+                    if (switchRememberMe.isChecked()) {
+                        // Request a string response from the provided URL.
+                        JsonObjectRequest custRequest = new JsonObjectRequest(Request.Method.GET, URLManager.getLoginURL(inputUsername, inputPassword), null,
+                                response -> {
+                                    try {
+                                        if (response.has("customerId"))
+                                            try {
+                                                CustomerEntity customer = CustomerManager.buildCustomer(response);
+                                                Intent intent = new Intent(getApplicationContext(), StartActivity.class);
+                                                intent.putExtra("customer", (Serializable) customer);
+                                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                                getApplicationContext().startActivity(intent);
+                                                editor.putString("USERNAME", inputUsername);
+                                                editor.putString("PASSWORD", inputPassword);
+                                                editor.apply();
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+                                        else{
+                                            Toast.makeText(getApplicationContext(), "Invalid Login Credentials. Please try again", Toast.LENGTH_SHORT).show();
                                         }
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
-                            }, error -> Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show());
-                    queue.start();
-                    queue.add(custRequest);
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                }, error -> Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show());
+                        queue.start();
+                        queue.add(custRequest);
+                    } else {
+                        JsonObjectRequest custRequest = new JsonObjectRequest(Request.Method.GET, URLManager.getLoginURL(inputUsername, inputPassword), null,
+                                response -> {
+                                    try {
+                                        if (response.has("customerId"))
+                                            try {
+                                                CustomerEntity customer = CustomerManager.buildCustomer(response);
+                                                Intent intent = new Intent(getApplicationContext(), StartActivity.class);
+                                                intent.putExtra("customer", (Serializable) customer);
+                                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                                getApplicationContext().startActivity(intent);
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+                                        else{
+                                            Toast.makeText(getApplicationContext(), "Invalid Login Credentials. Please try again", Toast.LENGTH_SHORT).show();
+                                        }
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                }, error -> Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show());
+                        queue.start();
+                        queue.add(custRequest);
+                    }
                 }
+            }
+        });
+        lblRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                getApplicationContext().startActivity(intent);
             }
         });
     }
