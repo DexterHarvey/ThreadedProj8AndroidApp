@@ -106,7 +106,7 @@ public class PackagesAdapter extends RecyclerView.Adapter<PackagesAdapter.Packag
             rootView = itemView;
             lblPackageDescription = itemView.findViewById(R.id.lblPackageDescription);
             lblPackageStartDate = itemView.findViewById(R.id.lblPackageStartDate);
-            ddlNoOfTravelers = itemView.findViewById(R.id.ddlNoOfTravellers);
+            ddlNoOfTravelers = itemView.findViewById(R.id.ddlClassId);
             ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(itemView.getContext(), android.R.layout.simple_spinner_dropdown_item, travellers);
             ddlNoOfTravelers.setAdapter(adapter);
             onItemClicked = onItmCLk;

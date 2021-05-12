@@ -34,8 +34,8 @@ public class BookingDetailsActivity extends AppCompatActivity {
         lblDestinationInfo = findViewById(R.id.lblDestinationInfo);
         lblTotalCostInfo = findViewById(R.id.lblTotalCostInfo);
         lblItineraryNoInfo.setText(String.valueOf(booking.getItineraryNo()));
-        lblTripStartInfo.setText(booking.getTripStart());
-        lblTripEndInfo.setText(booking.getTripEnd());
+        lblTripStartInfo.setText(booking.getTripStart().toString());
+        lblTripEndInfo.setText(booking.getTripEnd().toString());
         lblDescriptionInfo.setText(booking.getDescription());
         lblDestinationInfo.setText(booking.getDestination());
         lblTotalCostInfo.setText(String.valueOf((booking.getBasePrice() + booking.getAgencyCommission())));

@@ -12,8 +12,9 @@ public class PackageEntity implements Serializable {
     private String pkgDesc;
     private Double pkgBasePrice;
     private Double pkgAgencyCommission;
+    private String regionId;
 
-    public PackageEntity(int packageId, String pkgName, Timestamp pkgStartDate, Timestamp pkgEndDate, String pkgDesc, Double pkgBasePrice, Double pkgAgencyCommission) {
+    public PackageEntity(int packageId, String pkgName, Timestamp pkgStartDate, Timestamp pkgEndDate, String pkgDesc, Double pkgBasePrice, Double pkgAgencyCommission, String regionId) {
         this.packageId = packageId;
         this.pkgName = pkgName;
         this.pkgStartDate = pkgStartDate;
@@ -21,6 +22,7 @@ public class PackageEntity implements Serializable {
         this.pkgDesc = pkgDesc;
         this.pkgBasePrice = pkgBasePrice;
         this.pkgAgencyCommission = pkgAgencyCommission;
+        this.regionId = regionId;
     }
 
     public PackageEntity() {
@@ -87,5 +89,13 @@ public class PackageEntity implements Serializable {
 
     public void setPkgAgencyCommission(Double pkgAgencyCommission) {
         this.pkgAgencyCommission = pkgAgencyCommission;
+    }
+
+    public String getRegionId() {
+        return regionId;
+    }
+
+    public void setRegionId(String regionId) {
+        this.regionId = regionId;
     }
 }

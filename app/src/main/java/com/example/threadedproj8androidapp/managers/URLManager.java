@@ -25,4 +25,13 @@ public class URLManager {
     public static String getCustDetailsPutURL() {
         return "http://10.0.2.2:8080/RESTApiForAndroid_war_exploded/api/customers/update";
     }
+    public static String getBookingsPostURL() {
+        return "http://10.0.2.2:8080/RESTApiForAndroid_war_exploded/api/bookings/addnew";
+    }
+    public static String getBookingDetailsPostURL() {
+        return "http://10.0.2.2:8080/RESTApiForAndroid_war_exploded/api/bookingdetails/addnew";
+    }
+    public static String getHighestBookingIdURL() {
+        return "http://10.0.2.2:8080/RESTApiForAndroid_war_exploded/api/bookings/highestbookingid";
+    }
 }
