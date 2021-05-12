@@ -13,13 +13,20 @@ import com.example.threadedproj8androidapp.R;
 import java.util.ArrayList;
 
 public class BookingDetailsAdapter extends RecyclerView.Adapter<BookingDetailsAdapter.BookingDetailsViewHolder> {
-    private ArrayList<BookingDetailsEntity> bookingDetails = new ArrayList<>();
+    private ArrayList<BookingDetailsEntity> mBookingDetails = new ArrayList<>();
+    private OnBookingDetailListener mOnBookingDetailListener;
+
+    public BookingDetailsAdapter(ArrayList<BookingDetailsEntity> bookings, OnBookingDetailListener onBookingDetailListener) {
+        this.mBookingDetails = bookings;
+        this.mOnBookingDetailListener = onBookingDetailListener;
+
+    }
 
     @NonNull
     @Override
     public BookingDetailsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.booking_details_list_item, parent, false);
-        return new BookingDetailsViewHolder(view);
+        return new BookingDetailsViewHolder(view, mOnBookingDetailListener);
     }
 
     @Override
@@ -29,30 +36,39 @@ public class BookingDetailsAdapter extends RecyclerView.Adapter<BookingDetailsAd
 
     @Override
     public int getItemCount() {
-        return bookingDetails.size();
+        return mBookingDetails.size();
     }
 
     public void updateData(ArrayList<BookingDetailsEntity> items) {
-        bookingDetails = new ArrayList<>(items);
+        mBookingDetails = new ArrayList<>(items);
         notifyDataSetChanged();
     }
 
     private BookingDetailsEntity getItem(int position) {
-        if (position >= 0 && position < bookingDetails.size())
-            return bookingDetails.get(position);
+        if (position >= 0 && position < mBookingDetails.size())
+            return mBookingDetails.get(position);
 
         return null;
     }
 
-    class BookingDetailsViewHolder extends RecyclerView.ViewHolder {
+    public interface OnBookingDetailListener{
+        void onBookingDetailClick(int position);
+    }
+
+    class BookingDetailsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView destination;
         TextView description;
+        OnBookingDetailListener onBookingDetailListener;
 
-        BookingDetailsViewHolder(View itemView) {
+        BookingDetailsViewHolder(View itemView, OnBookingDetailListener onBookingDetailListener) {
             super(itemView);
             destination = itemView.findViewById(R.id.destination);
             description = itemView.findViewById(R.id.description);
+            this.onBookingDetailListener = onBookingDetailListener;
+
+            itemView.setOnClickListener(this);
         }
+
 
         void bindData(BookingDetailsEntity bookingDetailsEntity) {
             if (bookingDetailsEntity == null)
@@ -60,6 +76,11 @@ public class BookingDetailsAdapter extends RecyclerView.Adapter<BookingDetailsAd
 
             destination.setText(bookingDetailsEntity.getDestination());
             description.setText(bookingDetailsEntity.getDescription());
+        }
+
+        @Override
+        public void onClick(View v) {
+            onBookingDetailListener.onBookingDetailClick(getAdapterPosition());
         }
     }
 }

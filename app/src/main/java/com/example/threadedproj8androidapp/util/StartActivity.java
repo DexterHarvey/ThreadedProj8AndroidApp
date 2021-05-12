@@ -56,6 +56,7 @@ public class StartActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), PackagesActivity.class);
+                intent.putExtra("customer", customer);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 getApplicationContext().startActivity(intent);
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)

@@ -24,5 +24,26 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="lblItineraryNo">Itinerary Number:</string>
+    <string name="lblTripStart">Trip Start:</string>
+    <string name="lblTripEnd">Trip End Date:</string>
+    <string name="lblDescription">Description:</string>
+    <string name="lblDestination">Destination:</string>
+    <string name="lblTotalCost">Total Cost:</string>
+    <string name="btnEditCustomer">Edit</string>
     <string name="title_activity_maps">Map</string>
+    <string name="btnPurchase">PURCHASE</string>
+    <string name="title_activity_purchases">Purchase</string>
+    <string name="lblBDItineraryNo">Itinerary No:</string>
+    <string name="lblBDTripStart">Trip Start:</string>
+    <string name="lblBDTripEnd">Trip End:</string>
+    <string name="lblBDDescription">Description:</string>
+    <string name="lblBDDestination">Destination:</string>
+    <string name="lblBDTotalPrice">Price:</string>
+    <string name="lblNoOfTrav"># Of Travellers:</string>
+    <string name="lblConfirmPurchase">Confirm Purchase?</string>
+    <string name="btnPurchaseConfirm">Purchase</string>
+    <string name="lblRegister"><u>No account? Click here to register.</u></string>
+    <string name="btnRegisterCustomer">Register</string>
+    <string name="switchRememberMe">Remember me:</string>
 </resources>
