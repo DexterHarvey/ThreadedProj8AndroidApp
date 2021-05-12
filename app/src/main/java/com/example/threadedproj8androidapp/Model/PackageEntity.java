@@ -1,5 +1,8 @@
 package com.example.threadedproj8androidapp.model;
 
+import android.content.Context;
+import android.text.format.DateFormat;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -97,5 +100,10 @@ public class PackageEntity implements Serializable {
 
     public void setRegionId(String regionId) {
         this.regionId = regionId;
+    }
+
+    public String getNiceDateFormat(Timestamp origDate, Context context){
+        DateFormat dateFormat =  new DateFormat();
+        return dateFormat.format("MMM dd, yyyy", origDate).toString();
     }
 }

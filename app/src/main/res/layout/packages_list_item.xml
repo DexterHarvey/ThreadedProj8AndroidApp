@@ -11,16 +11,14 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginRight="10dp">
 
             <LinearLayout
-                android:layout_width="210dp"
+                android:layout_width="296dp"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/ddlClassId"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
@@ -40,7 +38,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
                     android:layout_marginTop="4dp"
-                    android:text="A short description goes here." />
+                    android:text="A short description goes here."
+                    android:textStyle="italic" />
 
                 <TextView
                     android:id="@+id/lblPackageStartDate"
@@ -51,25 +50,12 @@
                     android:text="Start date 23 343 235 " />
             </LinearLayout>
 
-            <Spinner
-                android:id="@+id/ddlClassId"
-                android:layout_width="78dp"
-                android:layout_height="26dp"
-                android:layout_marginEnd="10dp"
-                android:dropDownWidth="50dp"
-                android:minWidth="50dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/btnPurchase"
-                app:layout_constraintHorizontal_bias="0.995"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:visibility="visible" />
-
             <Button
                 android:id="@+id/btnPurchase"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="6dp"
+                android:gravity="center_vertical"
                 android:text="@string/btnPurchase"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
