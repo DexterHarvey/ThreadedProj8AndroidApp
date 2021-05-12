@@ -59,7 +59,14 @@ public class PackagesAdapter extends RecyclerView.Adapter<PackagesAdapter.Packag
         PackageEntity packageEntity = packages.get(position);
         holder.lblPackageName.setText(packageEntity.getPkgName());
         holder.lblPackageDescription.setText(packageEntity.getPkgDesc());
-        holder.lblPackageStartDate.setText(String.valueOf(packageEntity.getPkgStartDate()));
+
+        // Do some date formatting
+        String startDate = packageEntity.getNiceDateFormat(
+                packageEntity.getPkgStartDate(), context.getApplicationContext());
+        String endDate = packageEntity.getNiceDateFormat(
+                packageEntity.getPkgEndDate(), context.getApplicationContext());
+        holder.lblPackageStartDate.setText(startDate + " - " + endDate);
+
         holder.packageEntity = packageEntity;
         holder.position = position;
         holder.itemView.setOnClickListener(new View.OnClickListener() {

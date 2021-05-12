@@ -40,7 +40,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
                     android:layout_marginTop="4dp"
-                    android:text="A short description goes here." />
+                    android:text="A short description goes here."
+                    android:textStyle="italic" />
 
                 <TextView
                     android:id="@+id/lblPackageStartDate"
