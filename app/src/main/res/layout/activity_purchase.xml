@@ -192,14 +192,15 @@
             android:text="@string/lblClassId"
             android:textColor="@color/black"
             android:textSize="16sp" />
+
         <Spinner
             android:id="@+id/ddlClassId"
-            android:layout_width="78dp"
+            android:layout_width="245dp"
             android:layout_height="26dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:dropDownWidth="50dp"
-            android:minWidth="50dp"/>
+            android:minWidth="50dp" />
     </TableRow>
 
     <TableRow

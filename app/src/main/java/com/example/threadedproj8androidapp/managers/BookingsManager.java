@@ -7,13 +7,17 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class BookingsManager {
     public static JSONObject buildJSONFromBooking(BookingEntity booking) {
         JSONObject json = new JSONObject();
+        SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy hh:mm:ss a");
+        String bookingDate = sdf.format(booking.getBookingDate());
         try {
-            json.put("bookingDate", booking.getBookingDate());
+            json.put("bookingDate", bookingDate);
             json.put("bookingNo", booking.getBookingNo());
             json.put("travelerCount", booking.getTravelerCount());
             json.put("customerId", booking.getCustomerId());
@@ -28,7 +32,14 @@ public class BookingsManager {
     public static BookingEntity buildBooking(JSONObject bookingData) throws JSONException {
         BookingEntity booking = new BookingEntity();
         booking.setBookingId(bookingData.getInt("bookingId"));
-        booking.setBookingDate(Timestamp.valueOf(bookingData.getString("itineraryNo")));
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
+            Date parsedDate = dateFormat.parse(bookingData.getString("bookingDate"));
+            Timestamp timestampDate = new java.sql.Timestamp(parsedDate.getTime());
+            booking.setBookingDate(timestampDate);
+        } catch (Exception e) {
+            //some code
+        }
         booking.setBookingNo(bookingData.getString("bookingNo"));
         booking.setTravelerCount(bookingData.getDouble("travelerCount"));
         booking.setCustomerId(bookingData.getInt("customerId"));
