@@ -12,7 +12,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/lblCustFName" />
+            android:text="@string/lblCustFName"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/txtCustFNameReg"
@@ -33,7 +36,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/lblCustLName" />
+            android:text="@string/lblCustLName"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/txtCustLNameReg"
@@ -53,7 +59,10 @@
             android:layout_width="72dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/lblCustAddress" />
+            android:text="@string/lblCustAddress"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/txtCustAddressReg"
@@ -73,7 +82,10 @@
             android:layout_width="74dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/lblCustCity" />
+            android:text="@string/lblCustCity"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/txtCustCityReg"
@@ -94,7 +106,10 @@
             android:layout_width="73dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/lblCustProv" />
+            android:text="@string/lblCustProv"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/txtCustProvinceReg"
@@ -114,7 +129,10 @@
             android:layout_width="82dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/lblCustPostal" />
+            android:text="@string/lblCustPostal"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/txtCustPostalCodeReg"
@@ -134,7 +152,10 @@
             android:layout_width="82dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/lblCustCountry" />
+            android:text="@string/lblCustCountry"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/txtCustCountryReg"
@@ -154,7 +175,10 @@
             android:layout_width="83dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/lblCustHomePhone" />
+            android:text="@string/lblCustHomePhone"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/txtCustHomePhoneReg"
@@ -174,7 +198,10 @@
             android:layout_width="83dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/lblCustBusPhone" />
+            android:text="@string/lblCustBusPhone"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/txtCustBusPhoneReg"
@@ -194,7 +221,10 @@
             android:layout_width="82dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/lblCustEmail" />
+            android:text="@string/lblCustEmail"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/txtCustEmailReg"
@@ -214,7 +244,10 @@
             android:layout_width="82dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/lblCustUsername" />
+            android:text="@string/lblCustUsername"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/txtUsernameReg"
@@ -234,7 +267,10 @@
             android:layout_width="82dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/lblCustPassword" />
+            android:text="@string/lblCustPassword"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/txtPasswordReg"
@@ -247,9 +283,11 @@
 
     <Button
         android:id="@+id/btnRegisterCustomer"
-        android:layout_width="wrap_content"
+        android:layout_width="110dp"
         android:layout_height="wrap_content"
-        android:text="@string/btnRegisterCustomer"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="50dp"/>
+        android:layout_marginTop="50dp"
+        android:backgroundTint=" #ff9933"
+        android:text="@string/btnRegisterCustomer"
+        android:textColor="#FFFFFF" />
 </LinearLayout>

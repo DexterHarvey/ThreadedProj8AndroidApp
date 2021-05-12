@@ -4,180 +4,198 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TableRow
+    <Space
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="17dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:gravity="center_vertical"
+        android:orientation="horizontal"
         android:paddingLeft="10dp"
         android:paddingRight="10dp">
 
         <TextView
-            android:id="@+id/lblDBItineraryNo"
-            android:layout_width="7dp"
+            android:id="@+id/lblBDItineraryNo"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:text="@string/lblBDItineraryNo"
             android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/lblBDItineraryNoValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/black"
             android:textSize="16sp" />
+    </LinearLayout>
 
-    <TextView
-        android:id="@+id/lblBDItineraryNoValue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:textSize="16sp"
-        android:textColor="@color/black"/>
-    </TableRow>
-
-    <TableRow
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:gravity="center_vertical"
+        android:orientation="horizontal"
         android:paddingLeft="10dp"
         android:paddingRight="10dp">
 
         <TextView
             android:id="@+id/lblBDTripStart"
-            android:layout_width="7dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:text="@string/lblBDTripStart"
+            android:textColor="@color/black"
             android:textSize="16sp"
-            android:textColor="@color/black"/>
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/lblBDTripStartValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textSize="16sp"
-            android:textColor="@color/black"/>
-    </TableRow>
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+    </LinearLayout>
 
-    <TableRow
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:gravity="center_vertical"
+        android:orientation="vertical"
         android:paddingLeft="10dp"
         android:paddingRight="10dp">
 
         <TextView
             android:id="@+id/lblBDTripEnd"
-            android:layout_width="7dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:text="@string/lblBDTripEnd"
+            android:textColor="@color/black"
             android:textSize="16sp"
-            android:textColor="@color/black"/>
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/lblBDTripEndValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textSize="16sp"
-            android:textColor="@color/black"/>
-    </TableRow>
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+    </LinearLayout>
 
-    <TableRow
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:gravity="center_vertical"
+        android:orientation="vertical"
         android:paddingLeft="10dp"
         android:paddingRight="10dp">
 
         <TextView
             android:id="@+id/lblBDDescription"
-            android:layout_width="58dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:text="@string/lblBDDescription"
             android:textColor="@color/black"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/lblBDDescriptionValue"
-            android:layout_width="100dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textColor="@color/black"
             android:textSize="16sp" />
-    </TableRow>
+    </LinearLayout>
 
-    <TableRow
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:gravity="center_vertical"
+        android:orientation="vertical"
         android:paddingLeft="10dp"
         android:paddingRight="10dp">
 
         <TextView
             android:id="@+id/lblBDDestination"
-            android:layout_width="59dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:text="@string/lblBDDestination"
             android:textColor="@color/black"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/lblBDDestinationValue"
-            android:layout_width="100dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textColor="@color/black"
             android:textSize="16sp" />
-    </TableRow>
+    </LinearLayout>
 
-    <TableRow
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:gravity="center_vertical"
+        android:orientation="vertical"
         android:paddingLeft="10dp"
         android:paddingRight="10dp">
 
         <TextView
             android:id="@+id/lblBDTotalPrice"
-            android:layout_width="7dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:text="@string/lblBDTotalPrice"
+            android:textColor="@color/black"
             android:textSize="16sp"
-            android:textColor="@color/black"/>
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/lblBDTotalPriceValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textSize="16sp"
-            android:textColor="@color/black"/>
-    </TableRow>
-    <TableRow
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:gravity="center_vertical"
+        android:orientation="vertical"
         android:paddingLeft="10dp"
         android:paddingRight="10dp">
 
         <TextView
             android:id="@+id/lblNoOfTrav"
-            android:layout_width="7dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:text="@string/lblNoOfTrav"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/lblNoOfTravValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:textSize="16sp"
             android:textColor="@color/black"/>
-
-        <Spinner
-            android:id="@+id/ddlNoOfTravelers"
-            android:layout_width="245dp"
-            android:layout_height="26dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:dropDownWidth="50dp"
-            android:minWidth="50dp"  />
-    </TableRow>
+    </LinearLayout>
 
     <TableRow
         android:layout_width="match_parent"
@@ -204,35 +222,39 @@
             android:minWidth="50dp" />
     </TableRow>
 
-    <TableRow
+    <Space
         android:layout_width="match_parent"
-        android:layout_height="300dp" />
+        android:layout_height="44dp" />
 
-    <TableRow
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center">
+        android:layout_height="38dp"
+        android:gravity="center"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/lblConfirmPurchase"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/lblConfirmPurchase"
-            android:textSize="16sp"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black"
+            android:textSize="16sp" />
 
-    </TableRow>
+    </LinearLayout>
 
-    <TableRow
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="vertical">
 
         <Button
             android:id="@+id/btnPurchaseConfirm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/btnPurchaseConfirm" />
-    </TableRow>
+            android:backgroundTint="#ff9933"
+            android:text="@string/btnPurchaseConfirm"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
 
 </LinearLayout>
