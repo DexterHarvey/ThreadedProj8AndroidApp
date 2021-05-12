@@ -30,7 +30,7 @@
     <string name="lblDescription">Description:</string>
     <string name="lblDestination">Destination:</string>
     <string name="lblTotalCost">Total Cost:</string>
-    <string name="btnEditCustomer">Edit</string>
+    <string name="btnEditCustomer">Update</string>
     <string name="title_activity_maps">Map</string>
     <string name="btnPurchase">PURCHASE</string>
     <string name="title_activity_purchases">Purchase</string>
