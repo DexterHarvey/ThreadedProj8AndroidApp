@@ -5,15 +5,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.graphics.Point;
 import android.os.Bundle;
-import android.util.Log;
-import android.util.Size;
-import android.view.Display;
-import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -23,7 +16,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.threadedproj8androidapp.adapter.PackagesAdapter;
-import com.example.threadedproj8androidapp.model.CoordinatesEntity;
+import com.example.threadedproj8androidapp.model.PkgDestinationsEntity;
 import com.example.threadedproj8androidapp.model.CustomerEntity;
 import com.example.threadedproj8androidapp.model.PackageEntity;
 
@@ -40,7 +33,6 @@ import com.example.threadedproj8androidapp.databinding.ActivityMapsBinding;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -60,7 +52,7 @@ public class PackagesActivity extends FragmentActivity implements OnMapReadyCall
     CustomerEntity customer;
 
     PackageEntity selectedPackage; // holder for last clicked package
-    private ArrayList<CoordinatesEntity> coordsArray;
+    private ArrayList<PkgDestinationsEntity> coordsArray;
     private PackagesAdapter adapter;
 
     @Override
@@ -85,11 +77,6 @@ public class PackagesActivity extends FragmentActivity implements OnMapReadyCall
 
         Executors.newSingleThreadExecutor().execute(new GetCoordinates()); // see method for details
 
-
-
-
-
-
     }
 
 
@@ -113,7 +100,7 @@ public class PackagesActivity extends FragmentActivity implements OnMapReadyCall
 
         int coordsCounter = 0; // we want to track whether there's only one coordinate - zooming is weird in this case
         LatLng currentCoords = null;
-        for (CoordinatesEntity coords : coordsArray){
+        for (PkgDestinationsEntity coords : coordsArray){
             // Each set of coords part of this package is added to the bounds
             if (coords.getPackageId() == pkgID){
                 currentCoords = new LatLng(coords.getLatitude(), coords.getLongitude());
@@ -124,7 +111,7 @@ public class PackagesActivity extends FragmentActivity implements OnMapReadyCall
 
         // Special case if just one set of coords - just go to it
         if (coordsCounter == 1) {
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentCoords, 12));
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentCoords, 8));
         }
         // Otherwise, zoom to the region containing all coords
         else {
@@ -144,7 +131,7 @@ public class PackagesActivity extends FragmentActivity implements OnMapReadyCall
         @Override
         public void run() {
             JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET,
-                    "http://10.0.2.2:8080/RESTApiForAndroid_war_exploded/api/coordinates/getall",
+                    "http://10.0.2.2:8080/RESTApiForAndroid_war_exploded/api/destinations/getall",
                     null,
                     new Response.Listener<JSONArray>() {
                         @Override
@@ -154,7 +141,7 @@ public class PackagesActivity extends FragmentActivity implements OnMapReadyCall
                             try {
                                 for(int i = 0; i< response.length(); i++){
                                     // Grab the current Package object from the array
-                                    CoordinatesEntity coords = new Gson().fromJson(response.getString(i), CoordinatesEntity.class);
+                                    PkgDestinationsEntity coords = new Gson().fromJson(response.getString(i), PkgDestinationsEntity.class);
                                     // Add the package to the listview adapter
                                     coordsArray.add(coords);
                                 }
@@ -207,7 +194,7 @@ public class PackagesActivity extends FragmentActivity implements OnMapReadyCall
                                     //  todo Add click listeners to select the current package
                                     int randomColorVal = new Random().nextInt(361); // Denote a marker color for this particular package
                                     // Go through the list of coordinates and put ones corresponding to this package on the map
-                                    for(CoordinatesEntity coordsSet: coordsArray ){
+                                    for(PkgDestinationsEntity coordsSet: coordsArray ){
                                         if (coordsSet.getPackageId() == pkg.getPackageId()){
                                             // Do a one-time focus of the map on marked location location
                                             if(firstMarker == true){
@@ -217,7 +204,8 @@ public class PackagesActivity extends FragmentActivity implements OnMapReadyCall
                                             // Add the marker
                                             mMap.addMarker(new MarkerOptions()
                                                     .position(new LatLng(coordsSet.getLatitude(), coordsSet.getLongitude()))
-                                                    .title(coordsSet.getName()).snippet("Part of " + pkg.getPkgName())
+                                                    .title(coordsSet.getName())
+                                                    .snippet(coordsSet.getDescription())
                                                     .icon(BitmapDescriptorFactory.defaultMarker(randomColorVal)));
 
                                         }

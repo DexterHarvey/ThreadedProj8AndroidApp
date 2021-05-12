@@ -1,21 +1,22 @@
 package com.example.threadedproj8androidapp.model;
 
-public class CoordinatesEntity {
-
-    private int CoordinateId;
+public class PkgDestinationsEntity {
+    private int pkgDestinationId;
     private int PackageId;
     private double Latitude;
     private double Longitude;
     private String Name;
+    private String Country;
+    private String Description;
 
-
-    public int getCoordinateId() {
-        return CoordinateId;
+    public int getPkgDestinationId() {
+        return pkgDestinationId;
     }
 
-    public void setCoordinateId(int coordinateId) {
-        CoordinateId = coordinateId;
+    public void setPkgDestinationId(int pkgDestinationId) {
+        this.pkgDestinationId = pkgDestinationId;
     }
+
 
     public int getPackageId() {
         return PackageId;
@@ -48,5 +49,22 @@ public class CoordinatesEntity {
     public void setName(String name) {
         Name = name;
     }
+
+    public String getCountry() {
+        return Country;
+    }
+
+    public void setCountry(String country) {
+        Country = country;
+    }
+
+    public String getDescription() {
+        return Description;
+    }
+
+    public void setDescription(String description) {
+        Description = description;
+    }
+
 
 }
