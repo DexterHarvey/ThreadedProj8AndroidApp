@@ -43,4 +43,7 @@
     <string name="lblNoOfTrav"># Of Travellers:</string>
     <string name="lblConfirmPurchase">Confirm Purchase?</string>
     <string name="btnPurchaseConfirm">Purchase</string>
+    <string name="lblRegister"><u>No account? Click here to register.</u></string>
+    <string name="btnRegisterCustomer">Register</string>
+    <string name="switchRememberMe">Remember me:</string>
 </resources>
