@@ -1,6 +1,8 @@
 package com.example.threadedproj8androidapp.adapter;
 
+import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,16 +27,29 @@ import java.util.ArrayList;
 public class PackagesAdapter extends RecyclerView.Adapter<PackagesAdapter.PackagesViewHolder> {
     ArrayList<PackageEntity> packages;
     CustomerEntity customer = new CustomerEntity();
+    private Context context;
 
-    public PackagesAdapter(ArrayList<PackageEntity> packages, CustomerEntity customer)
-        {this.packages = packages;
+    //declare interface
+    private OnItemClicked onClick;
+
+    //make interface like this
+    public interface OnItemClicked {
+        void onItemClick(int position);
+    }
+
+
+
+    public PackagesAdapter(Context context, ArrayList<PackageEntity> packages, CustomerEntity customer)
+        {
+        this.context = context;
+        this.packages = packages;
         this.customer = customer;
         }
     @NonNull
     @Override
     public PackagesViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.packages_list_item, parent, false);
-        PackagesViewHolder viewHolder = new PackagesViewHolder(view);
+        PackagesViewHolder viewHolder = new PackagesViewHolder(view, onClick);
         viewHolder.customer = customer;
         return viewHolder;
     }
@@ -46,9 +61,19 @@ public class PackagesAdapter extends RecyclerView.Adapter<PackagesAdapter.Packag
         holder.lblPackageStartDate.setText(String.valueOf(packageEntity.getPkgStartDate()));
         holder.packageEntity = packageEntity;
         holder.position = position;
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClick.onItemClick(position);
+            }
+        });
     }
     public CustomerEntity getCustomer() {
         return customer;
+    }
+
+    public ArrayList<PackageEntity> getPackages() {
+        return packages;
     }
 
     @Override
@@ -56,7 +81,12 @@ public class PackagesAdapter extends RecyclerView.Adapter<PackagesAdapter.Packag
         return this.packages.size();
     }
 
-    public static class PackagesViewHolder extends RecyclerView.ViewHolder {
+    public void setOnClick(OnItemClicked onClick)
+    {
+        this.onClick=onClick;
+    }
+
+    class PackagesViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView lblPackageDescription;
         TextView lblPackageStartDate;
         View rootView;
@@ -65,8 +95,9 @@ public class PackagesAdapter extends RecyclerView.Adapter<PackagesAdapter.Packag
         int position;
         PackageEntity packageEntity;
         CustomerEntity customer;
+        OnItemClicked onItemClicked;
 
-        public PackagesViewHolder(@NotNull View itemView) {
+        public PackagesViewHolder(@NotNull View itemView, OnItemClicked onItmCLk) {
             super(itemView);
             rootView = itemView;
             lblPackageDescription = itemView.findViewById(R.id.lblPackageDescription);
@@ -74,6 +105,7 @@ public class PackagesAdapter extends RecyclerView.Adapter<PackagesAdapter.Packag
             ddlNoOfTravelers = itemView.findViewById(R.id.ddlNoOfTravellers);
             ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(itemView.getContext(), android.R.layout.simple_spinner_dropdown_item, travellers);
             ddlNoOfTravelers.setAdapter(adapter);
+            onItemClicked = onItmCLk;
             itemView.findViewById(R.id.btnPurchase).setOnClickListener( new View.OnClickListener() {
 
                 @Override
@@ -94,6 +126,12 @@ public class PackagesAdapter extends RecyclerView.Adapter<PackagesAdapter.Packag
                     }
                 }
             });
+
+        }
+
+        @Override
+        public void onClick(View v) {
+            onItemClicked.onItemClick(position);
         }
     }
 }

@@ -5,7 +5,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Point;
 import android.os.Bundle;
+import android.util.Log;
+import android.util.Size;
+import android.view.Display;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -23,16 +28,19 @@ import com.example.threadedproj8androidapp.model.CustomerEntity;
 import com.example.threadedproj8androidapp.model.PackageEntity;
 
 import com.example.threadedproj8androidapp.R;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.threadedproj8androidapp.databinding.ActivityMapsBinding;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -41,7 +49,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.Executors;
 
-public class PackagesActivity extends FragmentActivity implements OnMapReadyCallback {
+public class PackagesActivity extends FragmentActivity implements OnMapReadyCallback, PackagesAdapter.OnItemClicked {
 
     private GoogleMap mMap;
     private ActivityMapsBinding mapsBinding;
@@ -52,8 +60,8 @@ public class PackagesActivity extends FragmentActivity implements OnMapReadyCall
     CustomerEntity customer;
 
     PackageEntity selectedPackage; // holder for last clicked package
-    private JSONArray coordinatesArray;
     private ArrayList<CoordinatesEntity> coordsArray;
+    private PackagesAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +72,7 @@ public class PackagesActivity extends FragmentActivity implements OnMapReadyCall
         setContentView(mapsBinding.getRoot());
 
 //        listView = findViewById(R.id.packages_lvPackages);
-        btnDetails = findViewById(R.id.packages_btnDetails);
+//        btnDetails = findViewById(R.id.packages_btnDetails);
         rvPackages = findViewById(R.id.rvPackages);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -77,40 +85,57 @@ public class PackagesActivity extends FragmentActivity implements OnMapReadyCall
 
         Executors.newSingleThreadExecutor().execute(new GetCoordinates()); // see method for details
 
-        // todo: Have it so that clicking a package sets a class variable to it,
-        //  to pass on to a Package Details intent on button press
-//        listView.setOnItemClickListener((parent, view, position, id) -> {
-//            selectedPackage = (PackageEntity) listView.getItemAtPosition(position);
-////            // todo: highlight listview item, zoom to map position
-//            Toast.makeText(this, "test: " + selectedPackage.getPkgName(), Toast.LENGTH_SHORT).show();
-//        });
 
-        // todo: define button behaviour to go to new intent (with selected package data)
-        btnDetails.setOnClickListener(v -> {
-            Toast.makeText(this, "Todo: go to a package details activity", Toast.LENGTH_SHORT).show();
-        });
 
 
 
 
     }
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Todo: set defauly map location, add options
-//        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        // Set up is all taken care of in the runnable threads (since marker placement requires some db calls)
+        // and in the xml layout
 
+    }
+
+    // On package click, we zoom to the coords in that package
+    @Override
+    public void onItemClick(int position) {
+        // Grab id from adapter based on click position
+        int pkgID = adapter.getPackages().get(position).getPackageId();
+
+        // Begin constructing LatLngBounds - this is an area of map that covers all given coordinates
+        LatLngBounds.Builder zoneBuilder = new LatLngBounds.Builder();
+
+        int coordsCounter = 0; // we want to track whether there's only one coordinate - zooming is weird in this case
+        LatLng currentCoords = null;
+        for (CoordinatesEntity coords : coordsArray){
+            // Each set of coords part of this package is added to the bounds
+            if (coords.getPackageId() == pkgID){
+                currentCoords = new LatLng(coords.getLatitude(), coords.getLongitude());
+                zoneBuilder.include(currentCoords);
+                coordsCounter ++;
+            }
+        }
+
+        // Special case if just one set of coords - just go to it
+        if (coordsCounter == 1) {
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentCoords, 12));
+        }
+        // Otherwise, zoom to the region containing all coords
+        else {
+            LatLngBounds packageZone = zoneBuilder.build();
+
+            // Pan and zoom over to the package region
+            // Thanks to this link for help getting the zoom right https://stackoverflow.com/questions/14828217/android-map-v2-zoom-to-show-all-the-markers
+            int width = getResources().getDisplayMetrics().widthPixels;
+            int height = (int) (getResources().getDisplayMetrics().heightPixels * 0.4); // 0.4 represents the rough 40% of the phone height the map takes up.. rough measure
+            mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(packageZone, width, height, (int) (width * 0.10)));
+        }
     }
 
 
@@ -170,18 +195,26 @@ public class PackagesActivity extends FragmentActivity implements OnMapReadyCall
                                 GsonBuilder gsonBuilder = new GsonBuilder();
                                 gsonBuilder.setDateFormat("MMM dd, yyyy, HH:mm:ss aaa");
                                 Gson gson = gsonBuilder.create();
+                                boolean firstMarker = true; // we're going to move the map to focus on just the first marker, so need to track this
                                 // Use Gson to pull out each JsonObject and add it to adapter
-                                for(int i = 0; i< response.length(); i++){
+                                for(int i = 0; i < response.length(); i++){
                                     // Grab the current Package object from the array
                                     PackageEntity pkg = gson.fromJson(response.getString(i), PackageEntity.class);
-                                    // Add the package to the listview adapter
+                                    // Add the package to the list of packages
                                     packages.add(pkg);
-                                    // TODO: add a marker on map for the package. requires addition of LatLng to db.
-                                    //  Add click listeners to select the current package
+
+                                    // Add markers on map for the package. requires addition of LatLng to db.
+                                    //  todo Add click listeners to select the current package
                                     int randomColorVal = new Random().nextInt(361); // Denote a marker color for this particular package
                                     // Go through the list of coordinates and put ones corresponding to this package on the map
                                     for(CoordinatesEntity coordsSet: coordsArray ){
                                         if (coordsSet.getPackageId() == pkg.getPackageId()){
+                                            // Do a one-time focus of the map on marked location location
+                                            if(firstMarker == true){
+                                                mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(coordsSet.getLatitude(), coordsSet.getLongitude())));
+                                                firstMarker = false;
+                                            }
+                                            // Add the marker
                                             mMap.addMarker(new MarkerOptions()
                                                     .position(new LatLng(coordsSet.getLatitude(), coordsSet.getLongitude()))
                                                     .title(coordsSet.getName()).snippet("Part of " + pkg.getPkgName())
@@ -194,10 +227,11 @@ public class PackagesActivity extends FragmentActivity implements OnMapReadyCall
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        PackagesAdapter adapter = new PackagesAdapter(packages, customer);
+                                        adapter = new PackagesAdapter(getApplicationContext(), packages, customer);
                                         rvPackages.setAdapter(adapter);
                                         rvPackages.setLayoutManager(new LinearLayoutManager(PackagesActivity.super.getApplicationContext()));
                                         rvPackages.setNestedScrollingEnabled(false);
+                                        adapter.setOnClick(PackagesActivity.this);
                                     }
                                 });
                             } catch (JSONException e) {
@@ -216,4 +250,5 @@ public class PackagesActivity extends FragmentActivity implements OnMapReadyCall
             queue.add(req);
         }
     }
+
 }
