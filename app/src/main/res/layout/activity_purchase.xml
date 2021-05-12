@@ -193,9 +193,34 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textSize="16sp"
+            android:textColor="@color/black"/>
+    </LinearLayout>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <TextView
+            android:id="@+id/lblClassId"
+            android:layout_width="136dp"
+            android:layout_height="wrap_content"
+            android:text="@string/lblClassId"
             android:textColor="@color/black"
             android:textSize="16sp" />
-    </LinearLayout>
+
+        <Spinner
+            android:id="@+id/ddlClassId"
+            android:layout_width="245dp"
+            android:layout_height="26dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:dropDownWidth="50dp"
+            android:minWidth="50dp" />
+    </TableRow>
 
     <Space
         android:layout_width="match_parent"

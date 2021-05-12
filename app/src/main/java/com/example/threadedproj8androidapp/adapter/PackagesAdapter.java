@@ -5,15 +5,13 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.threadedproj8androidapp.R;
+import com.example.threadedproj8androidapp.managers.FormatHelper;
 import com.example.threadedproj8androidapp.model.CustomerEntity;
 import com.example.threadedproj8androidapp.model.PackageEntity;
 import com.example.threadedproj8androidapp.util.PurchaseActivity;
@@ -57,8 +55,17 @@ public class PackagesAdapter extends RecyclerView.Adapter<PackagesAdapter.Packag
     @Override
     public void onBindViewHolder(@NotNull PackagesViewHolder holder, int position) {
         PackageEntity packageEntity = packages.get(position);
+        holder.lblPackageName.setText(packageEntity.getPkgName());
         holder.lblPackageDescription.setText(packageEntity.getPkgDesc());
-        holder.lblPackageStartDate.setText(String.valueOf(packageEntity.getPkgStartDate()));
+        holder.lblPkgPrice.setText(FormatHelper.getNiceMoneyFormat(packageEntity.getPkgBasePrice()));
+
+        // Do some date formatting
+        String startDate = FormatHelper.getNiceDateFormat(
+                packageEntity.getPkgStartDate());
+        String endDate = FormatHelper.getNiceDateFormat(
+                packageEntity.getPkgEndDate());
+        holder.lblPackageStartDate.setText(startDate + " - " + endDate);
+
         holder.packageEntity = packageEntity;
         holder.position = position;
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -93,8 +100,9 @@ public class PackagesAdapter extends RecyclerView.Adapter<PackagesAdapter.Packag
     public class PackagesViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView lblPackageDescription;
         TextView lblPackageStartDate;
+        TextView lblPackageName;
+        TextView lblPkgPrice;
         View rootView;
-        Spinner ddlNoOfTravelers;
         Integer[] travellers = new Integer[]{0, 1, 2, 3, 4, 5};
         int position;
         PackageEntity packageEntity;
@@ -104,30 +112,20 @@ public class PackagesAdapter extends RecyclerView.Adapter<PackagesAdapter.Packag
         public PackagesViewHolder(@NotNull View itemView, OnItemClicked onItmCLk) {
             super(itemView);
             rootView = itemView;
+            lblPackageName = itemView.findViewById(R.id.lblPackageName);
             lblPackageDescription = itemView.findViewById(R.id.lblPackageDescription);
             lblPackageStartDate = itemView.findViewById(R.id.lblPackageStartDate);
-            ddlNoOfTravelers = itemView.findViewById(R.id.ddlNoOfTravellers);
-            ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(itemView.getContext(), android.R.layout.simple_spinner_dropdown_item, travellers);
-            ddlNoOfTravelers.setAdapter(adapter);
+            lblPkgPrice = itemView.findViewById(R.id.lblPkgPrice);
             onItemClicked = onItmCLk;
             itemView.findViewById(R.id.btnPurchase).setOnClickListener( new View.OnClickListener() {
 
                 @Override
                 public void onClick(View v) {
-                    Integer numberOfTravellers = (Integer) ddlNoOfTravelers.getSelectedItem();
-                    if (numberOfTravellers.toString() != "0")
-                    {
                         Intent intent = new Intent(itemView.getContext(), PurchaseActivity.class);
                         intent.putExtra("package", (Serializable) packageEntity);
                         intent.putExtra("customer", customer);
-                        intent.putExtra("numberOfTravellers", numberOfTravellers);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         itemView.getContext().startActivity(intent);
-                    }
-                    else
-                    {
-                        Toast.makeText(itemView.getContext(), "You much travel with at least one traveller!", Toast.LENGTH_LONG);
-                    }
                 }
             });
 
