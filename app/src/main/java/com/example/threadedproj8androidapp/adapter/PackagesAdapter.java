@@ -65,7 +65,7 @@ public class PackagesAdapter extends RecyclerView.Adapter<PackagesAdapter.Packag
                 packageEntity.getPkgStartDate(), context.getApplicationContext());
         String endDate = packageEntity.getNiceDateFormat(
                 packageEntity.getPkgEndDate(), context.getApplicationContext());
-        holder.lblPackageStartDate.setText(startDate + " - " + endDate);
+        holder.lblPackageStartDate.setText("Runs from " + startDate + " - " + endDate);
 
         holder.packageEntity = packageEntity;
         holder.position = position;
@@ -103,7 +103,6 @@ public class PackagesAdapter extends RecyclerView.Adapter<PackagesAdapter.Packag
         TextView lblPackageStartDate;
         TextView lblPackageName;
         View rootView;
-        Spinner ddlNoOfTravelers;
         Integer[] travellers = new Integer[]{0, 1, 2, 3, 4, 5};
         int position;
         PackageEntity packageEntity;
@@ -116,28 +115,17 @@ public class PackagesAdapter extends RecyclerView.Adapter<PackagesAdapter.Packag
             lblPackageName = itemView.findViewById(R.id.lblPackageName);
             lblPackageDescription = itemView.findViewById(R.id.lblPackageDescription);
             lblPackageStartDate = itemView.findViewById(R.id.lblPackageStartDate);
-            ddlNoOfTravelers = itemView.findViewById(R.id.ddlClassId);
             ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(itemView.getContext(), android.R.layout.simple_spinner_dropdown_item, travellers);
-            ddlNoOfTravelers.setAdapter(adapter);
             onItemClicked = onItmCLk;
             itemView.findViewById(R.id.btnPurchase).setOnClickListener( new View.OnClickListener() {
 
                 @Override
                 public void onClick(View v) {
-                    Integer numberOfTravellers = (Integer) ddlNoOfTravelers.getSelectedItem();
-                    if (numberOfTravellers.toString() != "0")
-                    {
                         Intent intent = new Intent(itemView.getContext(), PurchaseActivity.class);
                         intent.putExtra("package", (Serializable) packageEntity);
                         intent.putExtra("customer", customer);
-                        intent.putExtra("numberOfTravellers", numberOfTravellers);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         itemView.getContext().startActivity(intent);
-                    }
-                    else
-                    {
-                        Toast.makeText(itemView.getContext(), "You much travel with at least one traveller!", Toast.LENGTH_LONG);
-                    }
                 }
             });
 
