@@ -7,11 +7,11 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="110dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="66dp"
+            android:layout_height="match_parent"
             android:layout_marginRight="10dp">
 
             <TextView
@@ -20,6 +20,7 @@
                 android:layout_height="20dp"
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="4dp"
+                android:text="A short description goes here."
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/ddlNoOfTravellers"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -33,6 +34,7 @@
                 android:layout_height="20dp"
                 android:layout_marginStart="12dp"
                 android:layout_marginBottom="6dp"
+                android:text="Start date 23 343 235 "
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/ddlNoOfTravellers"
                 app:layout_constraintHorizontal_bias="0.8"
