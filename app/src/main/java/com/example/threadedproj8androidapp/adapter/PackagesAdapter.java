@@ -5,15 +5,13 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.threadedproj8androidapp.R;
+import com.example.threadedproj8androidapp.managers.FormatHelper;
 import com.example.threadedproj8androidapp.model.CustomerEntity;
 import com.example.threadedproj8androidapp.model.PackageEntity;
 import com.example.threadedproj8androidapp.util.PurchaseActivity;
@@ -59,13 +57,14 @@ public class PackagesAdapter extends RecyclerView.Adapter<PackagesAdapter.Packag
         PackageEntity packageEntity = packages.get(position);
         holder.lblPackageName.setText(packageEntity.getPkgName());
         holder.lblPackageDescription.setText(packageEntity.getPkgDesc());
+        holder.lblPkgPrice.setText(FormatHelper.getNiceMoneyFormat(packageEntity.getPkgBasePrice()));
 
         // Do some date formatting
-        String startDate = packageEntity.getNiceDateFormat(
-                packageEntity.getPkgStartDate(), context.getApplicationContext());
-        String endDate = packageEntity.getNiceDateFormat(
-                packageEntity.getPkgEndDate(), context.getApplicationContext());
-        holder.lblPackageStartDate.setText("Runs from " + startDate + " - " + endDate);
+        String startDate = FormatHelper.getNiceDateFormat(
+                packageEntity.getPkgStartDate());
+        String endDate = FormatHelper.getNiceDateFormat(
+                packageEntity.getPkgEndDate());
+        holder.lblPackageStartDate.setText(startDate + " - " + endDate);
 
         holder.packageEntity = packageEntity;
         holder.position = position;
@@ -102,6 +101,7 @@ public class PackagesAdapter extends RecyclerView.Adapter<PackagesAdapter.Packag
         TextView lblPackageDescription;
         TextView lblPackageStartDate;
         TextView lblPackageName;
+        TextView lblPkgPrice;
         View rootView;
         Integer[] travellers = new Integer[]{0, 1, 2, 3, 4, 5};
         int position;
@@ -115,7 +115,7 @@ public class PackagesAdapter extends RecyclerView.Adapter<PackagesAdapter.Packag
             lblPackageName = itemView.findViewById(R.id.lblPackageName);
             lblPackageDescription = itemView.findViewById(R.id.lblPackageDescription);
             lblPackageStartDate = itemView.findViewById(R.id.lblPackageStartDate);
-            ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(itemView.getContext(), android.R.layout.simple_spinner_dropdown_item, travellers);
+            lblPkgPrice = itemView.findViewById(R.id.lblPkgPrice);
             onItemClicked = onItmCLk;
             itemView.findViewById(R.id.btnPurchase).setOnClickListener( new View.OnClickListener() {
 
