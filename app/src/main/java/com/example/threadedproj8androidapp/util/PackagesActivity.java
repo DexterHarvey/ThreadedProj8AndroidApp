@@ -197,6 +197,7 @@ public class PackagesActivity extends FragmentActivity implements OnMapReadyCall
                                         PackagesAdapter adapter = new PackagesAdapter(packages, customer);
                                         rvPackages.setAdapter(adapter);
                                         rvPackages.setLayoutManager(new LinearLayoutManager(PackagesActivity.super.getApplicationContext()));
+                                        rvPackages.setNestedScrollingEnabled(false);
                                     }
                                 });
                             } catch (JSONException e) {
