@@ -21,6 +21,8 @@ import java.io.Serializable;
 
 public class StartActivity extends AppCompatActivity {
 
+
+
     private AppBarConfiguration appBarConfiguration;
     private ActivityStartBinding binding;
 
