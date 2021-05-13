@@ -18,4 +18,8 @@ public class FormatHelper {
         return formatter.format(yourMoney);
     }
 
+    public static int roundToInt(double dbl){
+        return (int) Math.round(dbl);
+    }
+
 }
