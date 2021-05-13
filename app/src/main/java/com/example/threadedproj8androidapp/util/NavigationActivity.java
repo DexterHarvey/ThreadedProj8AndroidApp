@@ -1,48 +1,40 @@
 package com.example.threadedproj8androidapp.util;
 
-import android.content.Intent;
-import android.os.Bundle;
-
-import com.example.threadedproj8androidapp.R;
-import com.example.threadedproj8androidapp.model.CustomerEntity;
-import com.example.threadedproj8androidapp.util.MainActivity;
-import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
-import android.view.View;
-
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+
+import com.example.threadedproj8androidapp.R;
 import com.example.threadedproj8androidapp.databinding.ActivityStartBinding;
 
 import java.io.Serializable;
 
-public class StartActivity extends AppCompatActivity {
+public class NavigationActivity extends AppCompatActivity {
 
-
-
-    private AppBarConfiguration appBarConfiguration;
-    private ActivityStartBinding binding;
+    ImageView btnToMap;
+    ImageView btnToLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        binding = ActivityStartBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-
-
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_start);
-        appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        setContentView(R.layout.activity_navigation);
 
         // Get customer info passed from login page
         Intent intent = getIntent();
-        CustomerEntity customer = (CustomerEntity) intent.getSerializableExtra("customer");
+        com.example.threadedproj8androidapp.model.CustomerEntity customer = (com.example.threadedproj8androidapp.model.CustomerEntity) intent.getSerializableExtra("customer");
 
-        binding.btnToLogin.setOnClickListener(new View.OnClickListener() {
+        btnToLogin = findViewById(R.id.btnToLogin);
+        btnToMap = findViewById(R.id.btnToMap);
+
+        btnToLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), CustomerActivity.class);
@@ -52,7 +44,7 @@ public class StartActivity extends AppCompatActivity {
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             }
         });
-        binding.btnToMap.setOnClickListener(new View.OnClickListener() {
+        btnToMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), PackagesActivity.class);
@@ -62,12 +54,5 @@ public class StartActivity extends AppCompatActivity {
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             }
         });
-    }
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_start);
-        return NavigationUI.navigateUp(navController, appBarConfiguration)
-                || super.onSupportNavigateUp();
     }
 }
