@@ -47,6 +47,7 @@ public class CustomerActivity extends AppCompatActivity implements BookingDetail
     TextView lblUsernameValue;
     TextView lblPasswordValue;
     Button btnEditCustomer;
+    Button btnLogout;
     RecyclerView rvBookingDetails;
     BookingDetailsAdapter adapter;
     RequestQueue queue;
@@ -70,6 +71,7 @@ public class CustomerActivity extends AppCompatActivity implements BookingDetail
         lblUsernameValue = findViewById(R.id.lblUsernameValue);
         lblPasswordValue = findViewById(R.id.lblPasswordValue);
         btnEditCustomer = findViewById(R.id.btnEditCustomer);
+        btnLogout = findViewById(R.id.btnLogout);
         rvBookingDetails = findViewById(R.id.rvBookingDetails);
         txtCustFName.setText(customer.getCustFirstName());
         txtCustLName.setText(customer.getCustLastName());
@@ -146,6 +148,15 @@ public class CustomerActivity extends AppCompatActivity implements BookingDetail
                 queue.start();
                 queue.add(custRequest);
 
+            }
+        });
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(getApplicationContext(), MainActivity.class);
+                intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent1.putExtra("isLogout", true);
+                getApplicationContext().startActivity(intent1);
             }
         });
     }

@@ -8,6 +8,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.threadedproj8androidapp.R;
+import com.example.threadedproj8androidapp.managers.FormatHelper;
 import com.example.threadedproj8androidapp.model.BookingDetailsEntity;
 
 public class BookingDetailsActivity extends AppCompatActivity {
@@ -34,8 +35,8 @@ public class BookingDetailsActivity extends AppCompatActivity {
         lblDestinationInfo = findViewById(R.id.lblDestinationInfo);
         lblTotalCostInfo = findViewById(R.id.lblTotalCostInfo);
         lblItineraryNoInfo.setText(String.valueOf(booking.getItineraryNo()));
-        lblTripStartInfo.setText(booking.getTripStart().toString());
-        lblTripEndInfo.setText(booking.getTripEnd().toString());
+        lblTripStartInfo.setText(FormatHelper.getNiceDateFormat(booking.getTripStart()));
+        lblTripEndInfo.setText(FormatHelper.getNiceDateFormat(booking.getTripEnd()));
         lblDescriptionInfo.setText(booking.getDescription());
         lblDestinationInfo.setText(booking.getDestination());
         lblTotalCostInfo.setText(String.valueOf((booking.getBasePrice() + booking.getAgencyCommission())));

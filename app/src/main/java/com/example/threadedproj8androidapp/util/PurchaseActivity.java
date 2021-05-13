@@ -161,6 +161,7 @@ public class PurchaseActivity extends AppCompatActivity {
                         public void onResponse(JSONObject response) {
                             try {
                                 BookingDetailsEntity test = BookingDetailsManager.buildBookingDetails(response);
+                                Toast.makeText(getApplicationContext(), test.getDestination(), Toast.LENGTH_LONG).show();
                                 Intent intent = new Intent(getApplicationContext(), StartActivity.class);
                                 intent.putExtra("customer", customer);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

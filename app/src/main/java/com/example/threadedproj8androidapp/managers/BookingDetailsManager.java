@@ -3,6 +3,8 @@ package com.example.threadedproj8androidapp.managers;
 import androidx.annotation.Nullable;
 
 import com.example.threadedproj8androidapp.model.BookingDetailsEntity;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -12,33 +14,16 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import static java.lang.Math.round;
 
 public class BookingDetailsManager {
-    public static BookingDetailsEntity buildBookingDetails(JSONObject bookingData) throws JSONException {
-        BookingDetailsEntity booking = new BookingDetailsEntity();
-        try {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
-            Date parsedStartDate = dateFormat.parse(bookingData.getString("tripStart"));
-            Date parsedEndDate = dateFormat.parse(bookingData.getString("tripEnd"));
-            Timestamp timestampStart = new java.sql.Timestamp(parsedStartDate.getTime());
-            Timestamp timestampEnd = new java.sql.Timestamp(parsedEndDate.getTime());
-            booking.setTripStart(timestampStart);
-            booking.setTripEnd(timestampEnd);
-        } catch(Exception e) { //this generic but you can control another types of exception
-            // look the origin of excption
-        }
-        booking.setBookingDetailId(bookingData.getInt("bookingDetailId"));
-        booking.setItineraryNo(bookingData.getDouble("itineraryNo"));
-        booking.setDescription(bookingData.getString("description"));
-        booking.setDestination(bookingData.getString("destination"));
-        booking.setBasePrice(bookingData.getDouble("basePrice"));
-        booking.setAgencyCommission(bookingData.getDouble("agencyCommission"));
-        booking.setBookingId(bookingData.getInt("bookingId"));
-        booking.setRegionId(bookingData.getString("regionId"));
-        booking.setClassId(bookingData.getString("classId"));
-        booking.setFeeId(bookingData.getString("feeId"));
+    public static BookingDetailsEntity buildBookingDetails(JSONObject bookingData) throws JSONException{
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        gsonBuilder.setDateFormat("MMM dd, yyyy, HH:mm:ss aaa");
+        Gson gson = gsonBuilder.create();
+        BookingDetailsEntity booking = gson.fromJson(String.valueOf(bookingData), BookingDetailsEntity.class);
         return booking;
     }
     public static JSONObject buildJSONFromBookingDetails(BookingDetailsEntity bd) {
