@@ -195,11 +195,11 @@
 
         <Spinner
             android:id="@+id/ddlNoOfTravelers"
-            android:layout_width="100dp"
+            android:layout_width="75dp"
             android:layout_height="26dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            android:dropDownWidth="100dp"
+            android:dropDownWidth="match_parent"
             android:minWidth="50dp" />
     </LinearLayout>
 
@@ -222,11 +222,11 @@
 
         <Spinner
             android:id="@+id/ddlClassId"
-            android:layout_width="200dp"
+            android:layout_width="150dp"
             android:layout_height="26dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            android:dropDownWidth="200dp"
+            android:dropDownWidth="match_parent"
             android:minWidth="50dp" />
     </LinearLayout>
 

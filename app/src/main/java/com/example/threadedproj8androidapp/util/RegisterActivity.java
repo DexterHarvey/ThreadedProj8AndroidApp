@@ -80,33 +80,35 @@ public class RegisterActivity extends AppCompatActivity {
                     txtUsernameReg.setText("jguy");
                     txtPasswordReg.setText("password");
                 }
-                customer.setCustFirstName(txtCustFNameReg.getText().toString());
-                customer.setCustLastName(txtCustLNameReg.getText().toString());
-                customer.setCustAddress(txtCustAddressReg.getText().toString());
-                customer.setCustCity(txtCustCityReg.getText().toString());
-                customer.setCustProv(txtCustProvinceReg.getText().toString());
-                customer.setCustPostal(txtCustPostalCodeReg.getText().toString());
-                customer.setCustCountry(txtCustCountryReg.getText().toString());
-                customer.setCustHomePhone(PhoneNumberUtils.formatNumber(txtCustHomePhoneReg.getText().toString()));
-                customer.setCustBusPhone(PhoneNumberUtils.formatNumber(txtCustBusPhoneReg.getText().toString()));
-                customer.setCustEmail(txtCustEmailReg.getText().toString());
-                customer.setUsername(txtUsernameReg.getText().toString());
-                customer.setPassword(txtPasswordReg.getText().toString());
-                JSONObject customerJSON = CustomerManager.buildJSONFromCustomer(customer);
-                queue = Volley.newRequestQueue(getApplicationContext());
-                JsonObjectRequest customerPost = new JsonObjectRequest(Request.Method.POST, URLManager.getCustPostURL(), customerJSON,
-                        new Response.Listener<JSONObject>() {
-                            @Override
-                            public void onResponse(JSONObject response) {
+                else {
+                    customer.setCustFirstName(txtCustFNameReg.getText().toString());
+                    customer.setCustLastName(txtCustLNameReg.getText().toString());
+                    customer.setCustAddress(txtCustAddressReg.getText().toString());
+                    customer.setCustCity(txtCustCityReg.getText().toString());
+                    customer.setCustProv(txtCustProvinceReg.getText().toString());
+                    customer.setCustPostal(txtCustPostalCodeReg.getText().toString());
+                    customer.setCustCountry(txtCustCountryReg.getText().toString());
+                    customer.setCustHomePhone(PhoneNumberUtils.formatNumber(txtCustHomePhoneReg.getText().toString()));
+                    customer.setCustBusPhone(PhoneNumberUtils.formatNumber(txtCustBusPhoneReg.getText().toString()));
+                    customer.setCustEmail(txtCustEmailReg.getText().toString());
+                    customer.setUsername(txtUsernameReg.getText().toString());
+                    customer.setPassword(txtPasswordReg.getText().toString());
+                    JSONObject customerJSON = CustomerManager.buildJSONFromCustomer(customer);
+                    queue = Volley.newRequestQueue(getApplicationContext());
+                    JsonObjectRequest customerPost = new JsonObjectRequest(Request.Method.POST, URLManager.getCustPostURL(), customerJSON,
+                            new Response.Listener<JSONObject>() {
+                                @Override
+                                public void onResponse(JSONObject response) {
                                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                     intent.putExtra("newCustUsername", customer.getUsername());
                                     intent.putExtra("newCustPassword", customer.getPassword());
                                     getApplicationContext().startActivity(intent);
-                            }
-                        }, error -> Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show());
-                queue.add(customerPost);
-                queue.start();
+                                }
+                            }, error -> Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show());
+                    queue.add(customerPost);
+                    queue.start();
+                }
             }
         });
     }
