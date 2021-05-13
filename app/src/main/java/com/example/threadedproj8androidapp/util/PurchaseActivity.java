@@ -38,6 +38,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Random;
 import java.util.concurrent.Executors;
 
@@ -61,7 +62,8 @@ public class PurchaseActivity extends AppCompatActivity {
     Button btnPurchaseConfirm;
     RequestQueue queue;
     Integer[] travellers = {1, 2, 3, 4, 5, 6};
-    String[] classes = {"BSN", "DBL", "DLX", "ECN", "FST", "INT", "OCNV", "SNG"};
+    String[] classKeys = {"BSN", "DBL", "DLX", "ECN", "FST", "INT", "OCNV", "SNG"};
+    String[] classes = {"Business", "Double", "Deluxe", "Economy", "First Class", "Interior", "Ocean View", "Single"};
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -79,9 +81,15 @@ public class PurchaseActivity extends AppCompatActivity {
         ddlClassId = findViewById(R.id.ddlClassId);
         ddlNoOfTravelers = findViewById(R.id.ddlNoOfTravelers);
         btnPurchaseConfirm = findViewById(R.id.btnPurchaseConfirm);
+        String[] spinnerArray = new String[classes.length];
+        HashMap<Integer, String> spinnerMap = new HashMap<Integer, String >();
+        for (int i = 0; i < classKeys.length; i++) {
+            spinnerMap.put(i, classKeys[i]);
+            spinnerArray[i] = classes[i];
+        }
         ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(this, android.R.layout.simple_spinner_dropdown_item, travellers);
         ddlNoOfTravelers.setAdapter(adapter);
-        ArrayAdapter<String> adapter1 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, classes);
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, spinnerArray);
         ddlClassId.setAdapter(adapter1);
         char bookNo1 = (char)(rand.nextInt(26) + 'A');
         char bookNo2 = (char)(rand.nextInt(26) + 'A');
@@ -124,7 +132,8 @@ public class PurchaseActivity extends AppCompatActivity {
         btnPurchaseConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                bookingDetails.setClassId((String) ddlClassId.getSelectedItem());
+                String classId = spinnerMap.get(ddlClassId.getSelectedItemPosition());
+                bookingDetails.setClassId((String) spinnerMap.get(ddlClassId.getSelectedItemPosition()));
                 numberOfTravellers = (Integer) ddlNoOfTravelers.getSelectedItem();
                 numberOfTravellersDouble = numberOfTravellers;
                 booking.setTravelerCount(numberOfTravellersDouble);
