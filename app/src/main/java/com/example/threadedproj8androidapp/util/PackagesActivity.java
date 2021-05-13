@@ -46,7 +46,6 @@ public class PackagesActivity extends FragmentActivity implements OnMapReadyCall
     private GoogleMap mMap;
     private ActivityMapsBinding mapsBinding;
 //    ListView listView;
-    Button btnDetails;
     RequestQueue queue;
     RecyclerView rvPackages;
     CustomerEntity customer;
@@ -54,6 +53,9 @@ public class PackagesActivity extends FragmentActivity implements OnMapReadyCall
     PackageEntity selectedPackage; // holder for last clicked package
     private ArrayList<PkgDestinationsEntity> coordsArray;
     private PackagesAdapter adapter;
+
+    // Holds color sets for package markers
+    private final int[] MARKER_COLOURS = {1, 50, 100, 180, 240, 280, 30, 320, 80};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -195,8 +197,11 @@ public class PackagesActivity extends FragmentActivity implements OnMapReadyCall
                                     packages.add(pkg);
 
                                     // Add markers on map for the package. requires addition of LatLng to db.
-                                    //  todo Add click listeners to select the current package
-                                    int randomColorVal = new Random().nextInt(361); // Denote a marker color for this particular package
+                                    // Denote a marker color for this particular package
+                                    int colorVal;
+                                    if (i < MARKER_COLOURS.length) { colorVal = MARKER_COLOURS[i]; } // we'll use a preset one if enough
+                                    else { colorVal = new Random().nextInt(361); } // otherwise get a random colour
+
                                     // Go through the list of coordinates and put ones corresponding to this package on the map
                                     for(PkgDestinationsEntity coordsSet: coordsArray ){
                                         if (coordsSet.getPackageId() == pkg.getPackageId()){
@@ -210,7 +215,7 @@ public class PackagesActivity extends FragmentActivity implements OnMapReadyCall
                                                     .position(new LatLng(coordsSet.getLatitude(), coordsSet.getLongitude()))
                                                     .title(coordsSet.getName() + " - " + pkg.getPkgName())
                                                     .snippet(coordsSet.getDescription())
-                                                    .icon(BitmapDescriptorFactory.defaultMarker(randomColorVal)));
+                                                    .icon(BitmapDescriptorFactory.defaultMarker(colorVal)));
 
                                         }
                                     }

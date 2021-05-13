@@ -307,17 +307,24 @@
             </LinearLayout>
         </ScrollView>
 
-        <Button
-            android:id="@+id/btnEditCustomer"
-            android:layout_width="110dp"
+        <TableRow
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
-            android:backgroundTint="#ff9933"
-            android:text="@string/btnEditCustomer"
-            android:textColor="@color/white"
-            android:drawableRight="@drawable/ic_action_edit"/>
+            android:gravity="center">
 
+            <Button
+                android:id="@+id/btnEditCustomer"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+
+                android:backgroundTint="#ff9933"
+                android:layout_marginEnd="20dp"
+                android:text="@string/btnEditCustomer"
+                android:textColor="@color/white"
+                android:drawableRight="@drawable/ic_action_edit"/>
+        </TableRow>
         <View
             android:id="@+id/divider"
             android:layout_width="match_parent"
