@@ -101,6 +101,8 @@
         android:layout_marginBottom="24dp"
         android:buttonTint="#ff9933"
         android:text="@string/switchRememberMe"
+        android:thumbTint="#ff9933"
+        android:trackTint="#ff9933"
         app:layout_constraintBottom_toTopOf="@+id/btnLogin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -111,7 +113,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="412dp"
-        android:layout_height="190dp"
+        android:layout_height="171dp"
         android:background="#ff9933"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

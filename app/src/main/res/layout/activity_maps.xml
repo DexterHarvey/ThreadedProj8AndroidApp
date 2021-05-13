@@ -16,6 +16,7 @@
         android:layout_marginBottom="5dp"
         android:text="Current Packages"
         android:textAlignment="center"
+        android:textColor="#0045cf"
         android:textSize="24sp"
         android:textStyle="bold" />
 
@@ -29,10 +30,11 @@
         android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
         android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         android:text="Here's Where We Can Take You:"
         android:textAlignment="center"
+        android:textColor="#0045cf"
         android:textSize="20sp"
         android:textStyle="bold" />
 
