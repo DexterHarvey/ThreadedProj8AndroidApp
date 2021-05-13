@@ -34,13 +34,13 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="104dp"
-        android:layout_height="115dp"
-        android:src="@drawable/orange_logo"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="99dp"
+        android:layout_height="104dp"
+        android:src="@drawable/square_logo"
+        app:layout_constraintBottom_toBottomOf="@+id/button_first"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.282" />
+        app:layout_constraintTop_toBottomOf="@+id/textview_first"
+        app:layout_constraintVertical_bias="0.124" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
