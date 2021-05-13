@@ -73,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
                                 intent1.putExtra("customer", (Serializable) customer);
                                 intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 getApplicationContext().startActivity(intent1);
+                                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -104,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
                                                 intent.putExtra("customer", (Serializable) customer);
                                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                                 getApplicationContext().startActivity(intent);
+                                                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                                                 editor.putString("USERNAME", inputUsername);
                                                 editor.putString("PASSWORD", inputPassword);
                                                 editor.apply();
@@ -130,6 +132,7 @@ public class MainActivity extends AppCompatActivity {
                                                 intent.putExtra("customer", (Serializable) customer);
                                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                                 getApplicationContext().startActivity(intent);
+                                                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                                             } catch (JSONException e) {
                                                 e.printStackTrace();
                                             }

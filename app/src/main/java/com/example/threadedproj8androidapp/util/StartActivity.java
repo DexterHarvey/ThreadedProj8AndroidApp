@@ -50,8 +50,7 @@ public class StartActivity extends AppCompatActivity {
                 intent.putExtra("customer", (Serializable) customer);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 getApplicationContext().startActivity(intent);
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             }
         });
         binding.btnToMap.setOnClickListener(new View.OnClickListener() {
@@ -61,6 +60,7 @@ public class StartActivity extends AppCompatActivity {
                 intent.putExtra("customer", customer);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 getApplicationContext().startActivity(intent);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             }
         });
     }
