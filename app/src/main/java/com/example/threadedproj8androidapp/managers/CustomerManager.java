@@ -42,6 +42,7 @@ public class CustomerManager {
             json.put("custHomePhone", customerEntity.getCustHomePhone());
             json.put("custBusPhone", customerEntity.getCustBusPhone());
             json.put("custEmail", customerEntity.getCustEmail());
+            json.put("agentId", customerEntity.getAgentId());
             json.put("username", customerEntity.getUsername());
             json.put("password", customerEntity.getPassword());
         }
