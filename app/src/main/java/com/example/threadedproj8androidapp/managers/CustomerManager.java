@@ -29,44 +29,24 @@ public class CustomerManager {
         customer.setPassword(custData.getString("password"));
         return customer;
     }
-    public static JSONObject buildJSONFromCustomer(@Nullable ArrayList<Integer> ints, ArrayList<String> strings) {
+    public static JSONObject buildJSONFromCustomer(CustomerEntity customerEntity) {
         JSONObject json = new JSONObject();
-        if (ints != null) {
-            try {
-                json.put("customerId", ints.get(0));
-                json.put("agentId", ints.get(1));
-                json.put("custFirstName", strings.get(0));
-                json.put("custLastName", strings.get(1));
-                json.put("custAddress", strings.get(2));
-                json.put("custCity", strings.get(3));
-                json.put("custProv", strings.get(4));
-                json.put("custPostal", strings.get(5));
-                json.put("custCountry", strings.get(6));
-                json.put("custHomePhone", strings.get(7));
-                json.put("custBusPhone", strings.get(8));
-                json.put("custEmail", strings.get(9));
-                json.put("username", strings.get(10));
-                json.put("password", strings.get(11));
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        } else {
-            try {
-                json.put("custFirstName", strings.get(0));
-                json.put("custLastName", strings.get(1));
-                json.put("custAddress", strings.get(2));
-                json.put("custCity", strings.get(3));
-                json.put("custProv", strings.get(4));
-                json.put("custPostal", strings.get(5));
-                json.put("custCountry", strings.get(6));
-                json.put("custHomePhone", strings.get(7));
-                json.put("custBusPhone", strings.get(8));
-                json.put("custEmail", strings.get(9));
-                json.put("username", strings.get(10));
-                json.put("password", strings.get(11));
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+        try {
+            json.put("custFirstName", customerEntity.getCustFirstName());
+            json.put("custLastName", customerEntity.getCustLastName());
+            json.put("custAddress", customerEntity.getCustAddress());
+            json.put("custCity", customerEntity.getCustCity());
+            json.put("custProv", customerEntity.getCustProv());
+            json.put("custPostal", customerEntity.getCustPostal());
+            json.put("custCountry", customerEntity.getCustCountry());
+            json.put("custHomePhone", customerEntity.getCustHomePhone());
+            json.put("custBusPhone", customerEntity.getCustBusPhone());
+            json.put("custEmail", customerEntity.getCustEmail());
+            json.put("username", customerEntity.getUsername());
+            json.put("password", customerEntity.getPassword());
+        }
+        catch (JSONException e) {
+            e.printStackTrace();
         }
         return json;
     }
