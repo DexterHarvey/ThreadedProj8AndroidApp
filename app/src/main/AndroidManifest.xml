@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.threadedproj8androidapp">
-
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -24,7 +23,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ThreadedProj8AndroidApp"
         android:usesCleartextTraffic="true">
+        <activity android:name=".util.SplashScreenActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -43,31 +48,28 @@
         <activity
             android:name=".util.RegisterActivity"
             android:label="@string/title_activity_purchases"
-            android:theme="@style/Theme.ThreadedProj8AndroidApp"/>
+            android:theme="@style/Theme.ThreadedProj8AndroidApp" />
         <activity
             android:name=".util.PurchaseActivity"
             android:label="@string/title_activity_purchases"
-            android:theme="@style/Theme.ThreadedProj8AndroidApp"/>
+            android:theme="@style/Theme.ThreadedProj8AndroidApp" />
         <activity
             android:name=".util.StartActivity"
             android:label="@string/title_activity_start"
-            android:theme="@style/Theme.ThreadedProj8AndroidApp.NoActionBar">
-
-        </activity>
+            android:theme="@style/Theme.ThreadedProj8AndroidApp.NoActionBar"></activity>
         <activity android:name=".util.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".util.CustomerActivity"
-            android:theme="@style/Theme.ThreadedProj8AndroidApp.NoActionBar"/>
+            android:theme="@style/Theme.ThreadedProj8AndroidApp.NoActionBar" />
         <activity
             android:name=".util.BookingDetailsActivity"
-            android:theme="@style/Theme.ThreadedProj8AndroidApp..Translucent"/>
+            android:theme="@style/Theme.ThreadedProj8AndroidApp..Translucent" />
     </application>
 
 </manifest>
