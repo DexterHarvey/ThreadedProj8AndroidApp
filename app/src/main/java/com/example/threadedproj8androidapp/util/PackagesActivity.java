@@ -176,7 +176,7 @@ public class PackagesActivity extends FragmentActivity implements OnMapReadyCall
         public void run() {
             // Create StringRequest, needs method, url, listener for what to do if success, listener for what to do if failure
             JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET,
-                    "http://10.0.2.2:8080/RESTApiForAndroid_war_exploded/api/packages/getall",
+                    "http://10.0.2.2:8080/RESTApiForAndroid_war_exploded/api/packages/getallupcoming",
                     null,
                     new Response.Listener<JSONArray>() {
                         @Override

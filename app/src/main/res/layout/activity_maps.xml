@@ -36,10 +36,12 @@
         android:textSize="20sp"
         android:textStyle="bold" />
 
-    <fragment
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:map="http://schemas.android.com/apk/res-auto"
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="411dp"
         android:layout_height="368dp"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        map:uiZoomControls="true"/>
 </LinearLayout>
