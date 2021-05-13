@@ -113,34 +113,22 @@ public class CustomerActivity extends AppCompatActivity implements BookingDetail
                 ArrayList<String> strings = new ArrayList<String>();
                 Integer custId = customer.getCustomerId();
                 ints.add(custId);
+                customer.setCustFirstName(txtCustFName.getText().toString());
                 String inputFirstName = txtCustFName.getText().toString();
                 strings.add(inputFirstName);
-                String inputLastName = txtCustLName.getText().toString();
-                strings.add(inputLastName);
-                String inputAddress = txtCustAddress.getText().toString();
-                strings.add(inputAddress);
-                String inputCity = txtCustCity.getText().toString();
-                strings.add(inputCity);
-                String inputProvince = txtCustProvince.getText().toString();
-                strings.add(inputProvince);
-                String inputPostalCode = txtCustPostalCode.getText().toString();
-                strings.add(inputPostalCode);
-                String inputCountry = txtCustCountry.getText().toString();
-                strings.add(inputCountry);
-                String inputHomePhone = txtCustHomePhone.getText().toString();
-                strings.add(inputHomePhone);
-                String inputBusPhone = txtCustBusPhone.getText().toString();
-                strings.add(inputBusPhone);
-                String inputEmail = txtCustEmail.getText().toString();
-                strings.add(inputEmail);
-                Integer agentId = customer.getAgentId();
-                ints.add(agentId);
-                String username = lblUsernameValue.getText().toString();
-                strings.add(username);
-                String password = lblPasswordValue.getText().toString();
-                strings.add(password);
+                customer.setCustLastName(txtCustLName.getText().toString());;
+                customer.setCustAddress(txtCustAddress.getText().toString());;
+                customer.setCustCity(txtCustCity.getText().toString());
+                customer.setCustProv(txtCustProvince.getText().toString());
+                customer.setCustPostal(txtCustPostalCode.getText().toString());
+                customer.setCustCountry(txtCustCountry.getText().toString());
+                customer.setCustHomePhone(txtCustHomePhone.getText().toString());
+                customer.setCustBusPhone(txtCustBusPhone.getText().toString());
+                customer.setCustEmail(txtCustEmail.getText().toString());
+                customer.setUsername(lblUsernameValue.getText().toString());
+                customer.setPassword(lblPasswordValue.getText().toString());
 
-                JsonObjectRequest custRequest = new JsonObjectRequest(Request.Method.PUT, URLManager.getCustDetailsPutURL(), CustomerManager.buildJSONFromCustomer(ints, strings),
+                JsonObjectRequest custRequest = new JsonObjectRequest(Request.Method.PUT, URLManager.getCustDetailsPutURL(), CustomerManager.buildJSONFromCustomer(customer),
                         response -> {
                             Log.d("PUT Response", response.toString());
                             Toast.makeText(getApplicationContext(), "Details updated successfully!", Toast.LENGTH_SHORT).show();

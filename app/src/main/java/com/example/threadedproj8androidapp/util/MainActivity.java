@@ -60,6 +60,9 @@ public class MainActivity extends AppCompatActivity {
             editor.remove("USERNAME").commit();
             editor.remove("PASSWORD").commit();
             switchRememberMe.setChecked(false);
+        } else if (intent.getStringExtra("newCustUsername") != null && intent.getStringExtra("newCustPassword") != null) {
+            txtUsername.setText(intent.getStringExtra("newCustUsername"));
+            txtPassword.setText(intent.getStringExtra("newCustPassword"));
         }
         queue = Volley.newRequestQueue(getApplicationContext());
         String savedUsername = preferences.getString("USERNAME", "");
