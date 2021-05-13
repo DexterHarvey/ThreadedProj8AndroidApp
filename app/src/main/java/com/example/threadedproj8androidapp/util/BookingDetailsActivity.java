@@ -1,8 +1,11 @@
 package com.example.threadedproj8androidapp.util;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,7 +28,8 @@ public class BookingDetailsActivity extends AppCompatActivity {
         DisplayMetrics dm = getApplicationContext().getResources().getDisplayMetrics();
         int width = dm.widthPixels;
         int height = dm.heightPixels;
-        getWindow().setLayout((int)(width * 0.7), (int)(height * 0.7));
+        getWindow().setLayout((int)(width * 0.7), WindowManager.LayoutParams.WRAP_CONTENT);
+        getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         Intent intent = getIntent();
         BookingDetailsEntity booking = (BookingDetailsEntity) intent.getSerializableExtra("booking");
         lblItineraryNoInfo = findViewById(R.id.lblItineraryInfo);
@@ -39,6 +43,6 @@ public class BookingDetailsActivity extends AppCompatActivity {
         lblTripEndInfo.setText(FormatHelper.getNiceDateFormat(booking.getTripEnd()));
         lblDescriptionInfo.setText(booking.getDescription());
         lblDestinationInfo.setText(booking.getDestination());
-        lblTotalCostInfo.setText(String.valueOf((booking.getBasePrice() + booking.getAgencyCommission())));
+        lblTotalCostInfo.setText(FormatHelper.getNiceMoneyFormat(booking.getBasePrice() + booking.getAgencyCommission()));
     }
 }
