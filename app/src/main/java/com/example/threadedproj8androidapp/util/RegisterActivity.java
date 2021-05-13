@@ -93,6 +93,7 @@ public class RegisterActivity extends AppCompatActivity {
                     customer.setCustEmail(txtCustEmailReg.getText().toString());
                     customer.setUsername(txtUsernameReg.getText().toString());
                     customer.setPassword(txtPasswordReg.getText().toString());
+                    customer.setAgentId(1);
                     JSONObject customerJSON = CustomerManager.buildJSONFromCustomer(customer);
                     queue = Volley.newRequestQueue(getApplicationContext());
                     JsonObjectRequest customerPost = new JsonObjectRequest(Request.Method.POST, URLManager.getCustPostURL(), customerJSON,

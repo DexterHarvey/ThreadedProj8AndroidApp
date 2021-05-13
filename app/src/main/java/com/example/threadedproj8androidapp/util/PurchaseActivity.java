@@ -22,6 +22,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.threadedproj8androidapp.R;
 import com.example.threadedproj8androidapp.managers.BookingDetailsManager;
 import com.example.threadedproj8androidapp.managers.BookingsManager;
+import com.example.threadedproj8androidapp.managers.FormatHelper;
 import com.example.threadedproj8androidapp.managers.URLManager;
 import com.example.threadedproj8androidapp.model.BookingDetailsEntity;
 import com.example.threadedproj8androidapp.model.BookingEntity;
@@ -127,7 +128,7 @@ public class PurchaseActivity extends AppCompatActivity {
         lblBDTripEndValue.setText(String.valueOf(bookingDetails.getTripEnd()));
         lblBDDescriptionValue.setText(bookingDetails.getDescription());
         lblBDDestinationValue.setText(bookingDetails.getDestination());
-        lblBDTotalPriceValue.setText(String.valueOf((bookingDetails.getBasePrice() + "$")));
+        lblBDTotalPriceValue.setText(FormatHelper.getNiceMoneyFormat(bookingDetails.getBasePrice()));
         JSONObject bookingJSON = BookingsManager.buildJSONFromBooking(booking);
         btnPurchaseConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -170,10 +171,8 @@ public class PurchaseActivity extends AppCompatActivity {
                         public void onResponse(JSONObject response) {
                             try {
                                 BookingDetailsEntity test = BookingDetailsManager.buildBookingDetails(response);
-                                Toast.makeText(getApplicationContext(), test.getDestination(), Toast.LENGTH_LONG).show();
-
+                                Toast.makeText(getApplicationContext(), "Successfully purchased " + test.getDestination(), Toast.LENGTH_LONG).show();
                                 Intent intent = new Intent(getApplicationContext(), CustomerActivity.class);
-
                                 intent.putExtra("customer", customer);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 getApplicationContext().startActivity(intent);

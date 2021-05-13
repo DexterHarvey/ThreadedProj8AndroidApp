@@ -11,8 +11,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp">
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:id="@+id/linearLayout2"
@@ -55,15 +54,14 @@
                 android:id="@+id/btnPurchase"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="40dp"
                 android:backgroundTint="#ff9933"
                 android:gravity="center_vertical"
                 android:text="@string/btnPurchase"
                 android:textColor="#FFFFFF"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.533" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/lblPkgPrice"
