@@ -127,7 +127,7 @@ public class PurchaseActivity extends AppCompatActivity {
         lblBDTripEndValue.setText(String.valueOf(bookingDetails.getTripEnd()));
         lblBDDescriptionValue.setText(bookingDetails.getDescription());
         lblBDDestinationValue.setText(bookingDetails.getDestination());
-        lblBDTotalPriceValue.setText(String.valueOf((bookingDetails.getBasePrice() + bookingDetails.getAgencyCommission())) + "$");
+        lblBDTotalPriceValue.setText(String.valueOf((bookingDetails.getBasePrice() + "$")));
         JSONObject bookingJSON = BookingsManager.buildJSONFromBooking(booking);
         btnPurchaseConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -171,7 +171,9 @@ public class PurchaseActivity extends AppCompatActivity {
                             try {
                                 BookingDetailsEntity test = BookingDetailsManager.buildBookingDetails(response);
                                 Toast.makeText(getApplicationContext(), test.getDestination(), Toast.LENGTH_LONG).show();
-                                Intent intent = new Intent(getApplicationContext(), NavigationActivity.class);
+
+                                Intent intent = new Intent(getApplicationContext(), CustomerActivity.class);
+
                                 intent.putExtra("customer", customer);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 getApplicationContext().startActivity(intent);
