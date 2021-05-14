@@ -124,8 +124,8 @@ public class PurchaseActivity extends AppCompatActivity {
         double itinNo = bookingDetails.getItineraryNo();
         int itinNoInt = (int) itinNo;
         lblBDItineraryNoValue.setText(String.valueOf(itinNoInt));
-        lblBDTripStartValue.setText(String.valueOf(bookingDetails.getTripStart()));
-        lblBDTripEndValue.setText(String.valueOf(bookingDetails.getTripEnd()));
+        lblBDTripStartValue.setText(FormatHelper.getNiceDateFormat(bookingDetails.getTripStart()));
+        lblBDTripEndValue.setText(FormatHelper.getNiceDateFormat(bookingDetails.getTripEnd()));
         lblBDDescriptionValue.setText(bookingDetails.getDescription());
         lblBDDestinationValue.setText(bookingDetails.getDestination());
         lblBDTotalPriceValue.setText(FormatHelper.getNiceMoneyFormat(bookingDetails.getBasePrice()));

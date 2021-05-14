@@ -54,14 +54,15 @@
                 android:id="@+id/btnPurchase"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="40dp"
+                android:layout_marginEnd="10dp"
                 android:backgroundTint="#ff9933"
                 android:gravity="center_vertical"
                 android:text="@string/btnPurchase"
                 android:textColor="#FFFFFF"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.466" />
 
             <TextView
                 android:id="@+id/lblPkgPrice"

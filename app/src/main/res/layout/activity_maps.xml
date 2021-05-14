@@ -22,7 +22,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvPackages"
-        android:layout_width="424dp"
+        android:layout_width="match_parent"
         android:layout_height="344dp"
         android:layout_weight="1" />
 
