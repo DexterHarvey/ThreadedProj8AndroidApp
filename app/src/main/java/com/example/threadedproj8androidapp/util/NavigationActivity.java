@@ -29,6 +29,7 @@ public class NavigationActivity extends AppCompatActivity {
         getSupportActionBar().hide(); //add this to hide ActionBar
 
         // Get customer info passed from login page
+
         Intent intent = getIntent();
         com.example.threadedproj8androidapp.model.CustomerEntity customer = (com.example.threadedproj8androidapp.model.CustomerEntity) intent.getSerializableExtra("customer");
 

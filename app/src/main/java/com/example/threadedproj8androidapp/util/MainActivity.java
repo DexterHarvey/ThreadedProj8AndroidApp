@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
                                             try {
                                                 CustomerEntity customer = CustomerManager.buildCustomer(response);
                                                 Intent intent = new Intent(getApplicationContext(), NavigationActivity.class);
-                                                intent.putExtra("customer", (Serializable) customer);
+                                                intent.putExtra("customer", customer);
                                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                                 getApplicationContext().startActivity(intent);
                                                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);

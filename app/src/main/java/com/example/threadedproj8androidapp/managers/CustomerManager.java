@@ -3,6 +3,7 @@ package com.example.threadedproj8androidapp.managers;
 import androidx.annotation.Nullable;
 
 import com.example.threadedproj8androidapp.model.CustomerEntity;
+import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -12,21 +13,7 @@ import java.util.ArrayList;
 
 public class CustomerManager {
     public static CustomerEntity buildCustomer(JSONObject custData) throws JSONException {
-        CustomerEntity customer = new CustomerEntity();
-        customer.setCustomerId(custData.getInt("customerId"));
-        customer.setCustFirstName(custData.getString("custFirstName"));
-        customer.setCustLastName(custData.getString("custLastName"));
-        customer.setCustAddress(custData.getString("custAddress"));
-        customer.setCustCity(custData.getString("custCity"));
-        customer.setCustProv(custData.getString("custProv"));
-        customer.setCustPostal(custData.getString("custPostal"));
-        customer.setCustCountry(custData.getString("custCountry"));
-        customer.setCustHomePhone(custData.getString("custHomePhone"));
-        customer.setCustBusPhone(custData.getString("custBusPhone"));
-        customer.setCustEmail(custData.getString("custEmail"));
-        customer.setAgentId(custData.getInt("agentId"));
-        customer.setUsername(custData.getString("username"));
-        customer.setPassword(custData.getString("password"));
+        CustomerEntity customer = new Gson().fromJson(String.valueOf(custData), CustomerEntity.class);
         return customer;
     }
     public static JSONObject buildJSONFromCustomer(CustomerEntity customerEntity) {
