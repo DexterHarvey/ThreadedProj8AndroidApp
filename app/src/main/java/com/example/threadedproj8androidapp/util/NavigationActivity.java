@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.example.threadedproj8androidapp.R;
-import com.example.threadedproj8androidapp.databinding.ActivityStartBinding;
 
 import java.io.Serializable;
 

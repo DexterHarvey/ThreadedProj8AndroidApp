@@ -47,14 +47,14 @@ public class MainActivity extends AppCompatActivity {
         //getSupportActionBar().hide(); //add this to Hide the ActionBar
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        preferences = getSharedPreferences("PREFERENCES", MODE_PRIVATE);
-        editor = preferences.edit();
-        switchRememberMe = findViewById(R.id.switchRememberMe);
         txtUsername = findViewById(R.id.txtUsername);
         txtPassword = findViewById(R.id.txtPassword);
         btnLogin = findViewById(R.id.btnLogin);
         lblAttemptInfo = findViewById(R.id.lblAttemptInfo);
         lblRegister = findViewById(R.id.lblRegister);
+        preferences = getSharedPreferences("PREFERENCES", MODE_PRIVATE);
+        editor = preferences.edit();
+        switchRememberMe = findViewById(R.id.switchRememberMe);
         Intent intent = getIntent();
         if (intent.getBooleanExtra("isLogout", false)) {
             editor.remove("USERNAME").commit();
@@ -65,27 +65,7 @@ public class MainActivity extends AppCompatActivity {
             txtPassword.setText(intent.getStringExtra("newCustPassword"));
         }
         queue = Volley.newRequestQueue(getApplicationContext());
-        String savedUsername = preferences.getString("USERNAME", "");
-        String savedPassword = preferences.getString("PASSWORD", "");
-        if(!savedUsername.equals("") && !savedPassword.equals("")) {
-            JsonObjectRequest custRequest = new JsonObjectRequest(Request.Method.GET, URLManager.getLoginURL(savedUsername, savedPassword), null,
-                    response -> {
-                        if (response.has("customerId"))
-                            try {
-                                switchRememberMe.setChecked(true);
-                                CustomerEntity customer = CustomerManager.buildCustomer(response);
-                                Intent intent1 = new Intent(getApplicationContext(), NavigationActivity.class);
-                                intent1.putExtra("customer", (Serializable) customer);
-                                intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                getApplicationContext().startActivity(intent1);
-                                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                    }, error -> Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show());
-            queue.start();
-            queue.add(custRequest);
-        }
+
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
