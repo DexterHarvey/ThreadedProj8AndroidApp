@@ -20,10 +20,38 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <TextView
+            android:id="@+id/textview_first"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Welcome to Travel Experts"
+            android:textColor="#0045cf"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="99dp"
+            android:layout_height="104dp"
+            android:src="@drawable/square_logo"
+            />
+
+        <View
+            android:id="@+id/divider2"
+            android:layout_width="326dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="45dp"
+            android:layout_marginBottom="45dp"
+            android:background="?android:attr/listDivider" />
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
             android:clipToPadding="false"
             android:gravity="center"
             android:orientation="horizontal">
@@ -31,7 +59,7 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:background="@drawable/layout_bg_rounded"
                 app:cardBackgroundColor="#ff9933">
 
                 <ImageView
@@ -46,6 +74,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.856"
+                    android:translationY="-7dp"
                     app:srcCompat="@drawable/ic_map" />
 
                 <TextView
@@ -55,14 +84,20 @@
                     android:layout_gravity="bottom|center"
                     android:layout_weight="1"
                     android:text="Packages"
+                    android:layout_marginBottom="5dp"
                     android:textColor="#FFFFFF"
                     android:textStyle="bold" />
 
             </androidx.cardview.widget.CardView>
 
+            <Space
+                android:layout_width="48dp"
+                android:layout_height="33dp" />
+
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/layout_bg_rounded"
                 app:cardBackgroundColor="#ff9933">
 
                 <ImageView
@@ -77,6 +112,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.86"
+                    android:translationY="-7dp"
                     app:srcCompat="@drawable/ic_login" />
 
                 <TextView
@@ -84,7 +120,90 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|center"
                     android:layout_weight="1"
+                    android:layout_marginBottom="5dp"
                     android:text="My Account"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold" />
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_weight="0" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="#ff9933"
+                android:background="?android:attr/listDivider">
+
+                <ImageView
+                    android:layout_width="94dp"
+                    android:layout_height="77dp"
+                    android:layout_margin="@dimen/fab_margin"
+                    android:backgroundTint="#ff9933"
+                    android:translationY="-7dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.167"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.856"
+                    app:srcCompat="@drawable/ic_coming_soon" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center"
+                    android:layout_marginBottom="5dp"
+                    android:layout_weight="1"
+                    android:text="Coming Soon"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold" />
+
+            </androidx.cardview.widget.CardView>
+
+            <Space
+                android:layout_width="48dp"
+                android:layout_height="33dp" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="#ff9933"
+                android:background="?android:attr/listDivider">
+
+                <ImageView
+                    android:layout_width="99dp"
+                    android:layout_height="80dp"
+                    android:layout_margin="@dimen/fab_margin"
+                    android:backgroundTint="#ff9933"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.876"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.86"
+                    android:translationY="-10dp"
+                    app:srcCompat="@drawable/ic_coming_soon" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center"
+                    android:layout_marginBottom="5dp"
+                    android:layout_weight="1"
+                    android:text="Coming Soon"
                     android:textColor="#FFFFFF"
                     android:textStyle="bold" />
             </androidx.cardview.widget.CardView>
@@ -93,32 +212,9 @@
 
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="99dp"
-        android:layout_height="104dp"
-        android:src="@drawable/square_logo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textview_first" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"></LinearLayout>
-
-    <TextView
-        android:id="@+id/textview_first"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Welcome to Travel Experts"
-        android:textColor="#0045cf"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.18" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

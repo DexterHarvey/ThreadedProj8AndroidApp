@@ -55,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
         preferences = getSharedPreferences("PREFERENCES", MODE_PRIVATE);
         editor = preferences.edit();
         switchRememberMe = findViewById(R.id.switchRememberMe);
+        getSupportActionBar().hide(); //add this to hide ActionBar
+
         Intent intent = getIntent();
         if (intent.getBooleanExtra("isLogout", false)) {
             editor.remove("USERNAME").commit();
