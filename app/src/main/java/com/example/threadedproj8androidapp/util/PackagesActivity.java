@@ -41,6 +41,13 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.Executors;
 
+/**
+ * Allows user to view all packages, including interactive map of destinations, and select one to purchase.
+ * Initial structure, recyclerview inclusion, and purchase page hookup by Dexter.
+ * Map inclusion and behaviour, addition of destinations to DB, and recyclerview item layout by Eric.
+ * Brand styling by Jetlyn.
+ */
+
 public class PackagesActivity extends FragmentActivity implements OnMapReadyCallback, PackagesAdapter.OnItemClicked {
 
     private GoogleMap mMap;
@@ -60,13 +67,11 @@ public class PackagesActivity extends FragmentActivity implements OnMapReadyCall
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         Intent intent = getIntent();
         customer = (CustomerEntity) intent.getSerializableExtra("customer");
         mapsBinding = ActivityMapsBinding.inflate(getLayoutInflater());
         setContentView(mapsBinding.getRoot());
-
-//        listView = findViewById(R.id.packages_lvPackages);
-//        btnDetails = findViewById(R.id.packages_btnDetails);
         rvPackages = findViewById(R.id.rvPackages);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -76,7 +81,6 @@ public class PackagesActivity extends FragmentActivity implements OnMapReadyCall
 
         // Get queue and make request for packages
         queue = Volley.newRequestQueue(getApplicationContext());
-
         Executors.newSingleThreadExecutor().execute(new GetCoordinates()); // see method for details
 
     }
@@ -85,13 +89,11 @@ public class PackagesActivity extends FragmentActivity implements OnMapReadyCall
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
         // Set up is all taken care of in the runnable threads (since marker placement requires some db calls)
         // and in the xml layout
-
     }
 
-    // On package click, we zoom to the coords in that package
+    // On package click, we zoom to the coords in that package [Eric]
     @Override
     public void onItemClick(int position) {
 
@@ -132,6 +134,7 @@ public class PackagesActivity extends FragmentActivity implements OnMapReadyCall
     }
 
 
+    // Runnable to request and process package destination data [Eric]
     private class GetCoordinates implements Runnable{
 
         @Override
@@ -170,6 +173,7 @@ public class PackagesActivity extends FragmentActivity implements OnMapReadyCall
         }
     }
 
+    // Request to get package data and work with it, after coordinate data has been loaded [Eric]
     private class GetPackages2 implements Runnable {
         ArrayList<PackageEntity> packages = new ArrayList<PackageEntity>();
         @Override
@@ -184,7 +188,6 @@ public class PackagesActivity extends FragmentActivity implements OnMapReadyCall
                             // Create an array adapter for incoming listview data
                             try {
                                 // Date parsing is a real delight. We need a custom GSON object to handle the incoming date strings.
-                                //TODO: my bugvision suggests this might mess up if ever packages get added with differently formatted dates in the javafx app...
                                 GsonBuilder gsonBuilder = new GsonBuilder();
                                 gsonBuilder.setDateFormat("MMM dd, yyyy, HH:mm:ss aaa");
                                 Gson gson = gsonBuilder.create();
