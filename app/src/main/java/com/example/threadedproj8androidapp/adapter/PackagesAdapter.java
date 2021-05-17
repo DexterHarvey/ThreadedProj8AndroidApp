@@ -21,22 +21,27 @@ import org.jetbrains.annotations.NotNull;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * Defines behaviour for PackageActivity's Recyclerview and its items.
+ * Majority of code laid down by Dexter.
+ * Additions to allow for extra onClick functionality and format date/ currency data by Eric.
+ */
+
+
 public class PackagesAdapter extends RecyclerView.Adapter<PackagesAdapter.PackagesViewHolder> {
     ArrayList<PackageEntity> packages;
     CustomerEntity customer = new CustomerEntity();
     private Context context;
-
-    //declare interface
-    private OnItemClicked onClick;
     private PackagesViewHolder viewHolder;
 
-    //make interface like this
+    //declare interface to allow for onItemClick behaviour to be coded
+    private OnItemClicked onClick;
+
     public interface OnItemClicked {
         void onItemClick(int position);
     }
 
-
-
+    // Cnostructor
     public PackagesAdapter(Context context, ArrayList<PackageEntity> packages, CustomerEntity customer)
         {
         this.context = context;
@@ -52,6 +57,7 @@ public class PackagesAdapter extends RecyclerView.Adapter<PackagesAdapter.Packag
         return viewHolder;
     }
 
+    // As the viewholder is bound, set values for its individual items
     @Override
     public void onBindViewHolder(@NotNull PackagesViewHolder holder, int position) {
         PackageEntity packageEntity = packages.get(position);
@@ -75,9 +81,6 @@ public class PackagesAdapter extends RecyclerView.Adapter<PackagesAdapter.Packag
             }
         });
     }
-    public CustomerEntity getCustomer() {
-        return customer;
-    }
 
     public ArrayList<PackageEntity> getPackages() {
         return packages;
@@ -88,15 +91,12 @@ public class PackagesAdapter extends RecyclerView.Adapter<PackagesAdapter.Packag
         return this.packages.size();
     }
 
-    public PackagesViewHolder getViewHolder() {
-        return viewHolder;
-    }
-
     public void setOnClick(OnItemClicked onClick)
     {
         this.onClick=onClick;
     }
 
+    // Viewholder for the recyclerview [almost all Dexter]
     public class PackagesViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView lblPackageDescription;
         TextView lblPackageStartDate;

@@ -12,6 +12,11 @@ import com.example.threadedproj8androidapp.R;
 
 import java.util.ArrayList;
 
+/**
+ * Defines behaviour for BookingDetailActivity's Recyclerview and its items.
+ * Code done by Dexter.
+ */
+
 public class BookingDetailsAdapter extends RecyclerView.Adapter<BookingDetailsAdapter.BookingDetailsViewHolder> {
     private ArrayList<BookingDetailsEntity> mBookingDetails = new ArrayList<>();
     private OnBookingDetailListener mOnBookingDetailListener;

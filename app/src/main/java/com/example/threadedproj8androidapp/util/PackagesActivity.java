@@ -43,7 +43,7 @@ import java.util.concurrent.Executors;
 
 /**
  * Allows user to view all packages, including interactive map of destinations, and select one to purchase.
- * Initial structure, recyclerview inclusion, and purchase page hookup by Dexter.
+ * Initial structure, recyclerview inclusion, and purchase page hookup by Dexter (see PackagesAdapter).
  * Map inclusion and behaviour, addition of destinations to DB, and recyclerview item layout by Eric.
  * Brand styling by Jetlyn.
  */
@@ -52,7 +52,6 @@ public class PackagesActivity extends FragmentActivity implements OnMapReadyCall
 
     private GoogleMap mMap;
     private ActivityMapsBinding mapsBinding;
-//    ListView listView;
     RequestQueue queue;
     RecyclerView rvPackages;
     CustomerEntity customer;
