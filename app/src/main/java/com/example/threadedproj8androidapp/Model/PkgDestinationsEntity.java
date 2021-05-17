@@ -1,4 +1,8 @@
 package com.example.threadedproj8androidapp.model;
+/**
+ * Entity class made by Eric
+ */
+
 
 public class PkgDestinationsEntity {
     private int pkgDestinationId;

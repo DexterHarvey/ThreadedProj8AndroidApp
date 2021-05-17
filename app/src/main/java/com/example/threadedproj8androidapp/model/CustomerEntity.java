@@ -2,6 +2,11 @@ package com.example.threadedproj8androidapp.model;
 
 import java.io.Serializable;
 
+/**
+ * Entity classes made by Dexter
+ */
+
+
 public class CustomerEntity implements Serializable{
     private int customerId;
     private String custFirstName;

@@ -29,6 +29,12 @@ import com.example.threadedproj8androidapp.model.CustomerEntity;
 
 import org.json.JSONException;
 
+/**
+ * Login activity (originally the main page, prior to splash inclusion). Allows user to login with correct credentials, or click to register.
+ * Code by Dexter, easy-debugging functionality and refactoring of code to include splash by Eric.
+ * Brand styling by Jetlyn.
+ */
+
 public class MainActivity extends AppCompatActivity {
 
     private SharedPreferences preferences;
@@ -44,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //getSupportActionBar().hide(); //add this to Hide the ActionBar
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         txtUsername = findViewById(R.id.txtUsername);

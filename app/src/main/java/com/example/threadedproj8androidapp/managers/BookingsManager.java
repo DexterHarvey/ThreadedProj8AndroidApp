@@ -11,6 +11,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * Manager class made by Dexter
+ */
+
 public class BookingsManager {
     public static JSONObject buildJSONFromBooking(BookingEntity booking) {
         JSONObject json = new JSONObject();

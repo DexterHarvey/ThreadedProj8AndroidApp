@@ -5,6 +5,10 @@ import java.math.BigDecimal;
 import java.sql.Time;
 import java.sql.Timestamp;
 
+/**
+ * Entity classes made by Dexter
+ */
+
 public class BookingDetailsEntity implements Serializable {
     private int bookingDetailId;
     private Double itineraryNo;

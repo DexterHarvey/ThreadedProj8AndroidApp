@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!--Created by Dexter, with light layout fixes by Eric-->
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/pkgLi_container"
     android:layout_width="match_parent"

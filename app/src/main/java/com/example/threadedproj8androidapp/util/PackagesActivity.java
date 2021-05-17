@@ -44,8 +44,8 @@ import java.util.concurrent.Executors;
 /**
  * Allows user to view all packages, including interactive map of destinations, and select one to purchase.
  * Initial structure, recyclerview inclusion, and purchase page hookup by Dexter (see PackagesAdapter).
- * Map inclusion and behaviour, addition of destinations to DB, and recyclerview item layout by Eric.
- * Brand styling by Jetlyn.
+ * Map inclusion and behaviour, addition of destinations to DB, and layout for activity & recyclerview by Eric.
+ * Brand colors added by Jetlyn.
  */
 
 public class PackagesActivity extends FragmentActivity implements OnMapReadyCallback, PackagesAdapter.OnItemClicked {

@@ -5,6 +5,10 @@ import android.text.format.DateFormat;
 import java.sql.Timestamp;
 import java.text.NumberFormat;
 
+/**
+ * Little formatting helper functions made and refactored into code by Eric
+ */
+
 public class FormatHelper {
 
     public static String getNiceDateFormat(Timestamp origDate){

@@ -2,6 +2,11 @@ package com.example.threadedproj8androidapp.model;
 
 import java.sql.Timestamp;
 
+/**
+ * Entity classes made by Dexter
+ */
+
+
 public class BookingEntity {
     private Integer bookingId;
     private Timestamp bookingDate;

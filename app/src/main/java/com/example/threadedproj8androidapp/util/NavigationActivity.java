@@ -16,6 +16,12 @@ import com.example.threadedproj8androidapp.R;
 
 import java.io.Serializable;
 
+/**
+ * Central hub activity which user is greeted by after login.
+ * Code and final layout by Eric.
+ * Brand colouring, button design and rough layout by Jetlyn.
+ */
+
 public class NavigationActivity extends AppCompatActivity {
 
     ImageView btnToMap;
@@ -29,7 +35,6 @@ public class NavigationActivity extends AppCompatActivity {
         getSupportActionBar().hide(); //add this to hide ActionBar
 
         // Get customer info passed from login page
-
         Intent intent = getIntent();
         com.example.threadedproj8androidapp.model.CustomerEntity customer = (com.example.threadedproj8androidapp.model.CustomerEntity) intent.getSerializableExtra("customer");
 

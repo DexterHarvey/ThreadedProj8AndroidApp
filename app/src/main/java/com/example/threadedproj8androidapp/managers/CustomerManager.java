@@ -10,6 +10,10 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+/**
+ * Manager class made by Dexter, with Eric assisting in debugging
+ */
+
 
 public class CustomerManager {
     public static CustomerEntity buildCustomer(JSONObject custData) throws JSONException {

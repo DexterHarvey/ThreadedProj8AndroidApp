@@ -43,6 +43,11 @@ import java.util.HashMap;
 import java.util.Random;
 import java.util.concurrent.Executors;
 
+/**
+ * Activity for viewing purchase details, allowing user choices in purchase, and purchase submission.
+ * All code by Dexter.
+ */
+
 public class PurchaseActivity extends AppCompatActivity {
     CustomerEntity customer = new CustomerEntity();
     BookingDetailsEntity bookingDetails = new BookingDetailsEntity();

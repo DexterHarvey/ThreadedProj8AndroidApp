@@ -33,6 +33,11 @@ import org.json.JSONException;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * Activity to view and update customer details, view customer booking details, and select those details to view more.
+ * Code by Dexter.
+ */
+
 public class CustomerActivity extends AppCompatActivity implements BookingDetailsAdapter.OnBookingDetailListener {
     EditText txtCustFName;
     EditText txtCustLName;

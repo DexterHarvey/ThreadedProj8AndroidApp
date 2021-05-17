@@ -22,6 +22,12 @@ import org.json.JSONException;
 
 import java.io.Serializable;
 
+/**
+ * Splash screen to serve as initial logo. Room for loading in future if needed.
+ * Created by Jetlyn.
+ * Some refactoring done by Eric.
+ */
+
 public class SplashScreenActivity extends AppCompatActivity {
 
     private SharedPreferences preferences;

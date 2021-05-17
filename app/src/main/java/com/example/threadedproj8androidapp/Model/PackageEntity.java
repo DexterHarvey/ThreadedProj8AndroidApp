@@ -7,6 +7,11 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
+/**
+ * Entity classes made by Dexter.
+ */
+
+
 public class PackageEntity implements Serializable {
     private int packageId;
     private String pkgName;

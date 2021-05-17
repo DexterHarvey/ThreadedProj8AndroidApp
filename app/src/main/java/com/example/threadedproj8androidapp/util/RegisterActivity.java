@@ -29,6 +29,11 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.concurrent.Executors;
 
+/**
+ * Registration page to allow new user to be created.
+ * All code by Dexter.
+ */
+
 public class RegisterActivity extends AppCompatActivity {
     EditText txtCustFNameReg;
     EditText txtCustLNameReg;

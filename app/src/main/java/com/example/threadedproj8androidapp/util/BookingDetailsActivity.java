@@ -14,6 +14,11 @@ import com.example.threadedproj8androidapp.R;
 import com.example.threadedproj8androidapp.managers.FormatHelper;
 import com.example.threadedproj8androidapp.model.BookingDetailsEntity;
 
+/**
+ * Popup activity displaying a given booking detail's data.
+ * Majority of code by Dexter, with formatting and layout improvements by Eric.
+ */
+
 public class BookingDetailsActivity extends AppCompatActivity {
     TextView lblItineraryNoInfo;
     TextView lblTripStartInfo;
@@ -28,7 +33,7 @@ public class BookingDetailsActivity extends AppCompatActivity {
         DisplayMetrics dm = getApplicationContext().getResources().getDisplayMetrics();
         int width = dm.widthPixels;
         int height = dm.heightPixels;
-        getWindow().setLayout((int)(width * 0.7), WindowManager.LayoutParams.WRAP_CONTENT);
+        getWindow().setLayout((int)(width * 0.7), WindowManager.LayoutParams.WRAP_CONTENT); // adjusted layout to better fit in space - Eric
         getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         Intent intent = getIntent();
         BookingDetailsEntity booking = (BookingDetailsEntity) intent.getSerializableExtra("booking");

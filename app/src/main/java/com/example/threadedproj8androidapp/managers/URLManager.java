@@ -4,6 +4,11 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
+/**
+ * Manages the creation of request urls for the app.
+ * Created by Dexter
+ */
+
 public class URLManager {
     public static String getLoginURL(String inputUsername, String inputPassword) {
         try {

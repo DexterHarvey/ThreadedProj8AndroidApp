@@ -18,6 +18,11 @@ import java.util.Locale;
 
 import static java.lang.Math.round;
 
+/**
+ * Manager class made by Dexter, with Eric assisting in debugging
+ */
+
+
 public class BookingDetailsManager {
     public static BookingDetailsEntity buildBookingDetails(JSONObject bookingData) throws JSONException{
         GsonBuilder gsonBuilder = new GsonBuilder();
