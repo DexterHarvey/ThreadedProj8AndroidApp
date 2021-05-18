@@ -7,7 +7,7 @@ import java.sql.Timestamp;
  */
 
 
-public class BookingEntity {
+public class BookingsEntity {
     private Integer bookingId;
     private Timestamp bookingDate;
     private String bookingNo;

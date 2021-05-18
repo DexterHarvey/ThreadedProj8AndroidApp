@@ -29,26 +29,32 @@ public class BookingDetailsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Set up popup window
         setContentView(R.layout.activity_booking_details);
         DisplayMetrics dm = getApplicationContext().getResources().getDisplayMetrics();
         int width = dm.widthPixels;
         int height = dm.heightPixels;
         getWindow().setLayout((int)(width * 0.7), WindowManager.LayoutParams.WRAP_CONTENT); // adjusted layout to better fit in space - Eric
         getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        // Populate fields via intent extra
         Intent intent = getIntent();
         BookingDetailsEntity booking = (BookingDetailsEntity) intent.getSerializableExtra("booking");
+        Double travelerCount = intent.getDoubleExtra("travelerCount", 1);
         lblItineraryNoInfo = findViewById(R.id.lblItineraryInfo);
         lblTripStartInfo = findViewById(R.id.lblTripStartInfo);
         lblTripEndInfo = findViewById(R.id.lblTripEndInfo);
         lblDescriptionInfo = findViewById(R.id.lblDescriptionInfo);
         lblDestinationInfo = findViewById(R.id.lblDestinationInfo);
         lblTotalCostInfo = findViewById(R.id.lblTotalCostInfo);
+
         lblItineraryNoInfo.setText(String.valueOf(
                 FormatHelper.roundToInt(booking.getItineraryNo())));
         lblTripStartInfo.setText(FormatHelper.getNiceDateFormat(booking.getTripStart()));
         lblTripEndInfo.setText(FormatHelper.getNiceDateFormat(booking.getTripEnd()));
         lblDescriptionInfo.setText(booking.getDescription());
         lblDestinationInfo.setText(booking.getDestination());
-        lblTotalCostInfo.setText(FormatHelper.getNiceMoneyFormat(booking.getBasePrice() + booking.getAgencyCommission()));
+        lblTotalCostInfo.setText(FormatHelper.getNiceMoneyFormat(booking.getBasePrice() * travelerCount));
     }
 }

@@ -2,8 +2,8 @@ package com.example.threadedproj8androidapp.util;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -16,7 +16,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.threadedproj8androidapp.R;
@@ -25,18 +24,14 @@ import com.example.threadedproj8androidapp.managers.BookingsManager;
 import com.example.threadedproj8androidapp.managers.FormatHelper;
 import com.example.threadedproj8androidapp.managers.URLManager;
 import com.example.threadedproj8androidapp.model.BookingDetailsEntity;
-import com.example.threadedproj8androidapp.model.BookingEntity;
+import com.example.threadedproj8androidapp.model.BookingsEntity;
 import com.example.threadedproj8androidapp.model.CustomerEntity;
 import com.example.threadedproj8androidapp.model.PackageEntity;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.sql.Array;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -45,26 +40,20 @@ import java.util.concurrent.Executors;
 
 /**
  * Activity for viewing purchase details, allowing user choices in purchase, and purchase submission.
- * All code by Dexter.
+ * Fix to traveler count bug by Eric, remaining code by Dexter.
  */
 
 public class PurchaseActivity extends AppCompatActivity {
+
+    // Declare class vars
     CustomerEntity customer = new CustomerEntity();
     BookingDetailsEntity bookingDetails = new BookingDetailsEntity();
-    BookingEntity booking = new BookingEntity();
+    BookingsEntity booking = new BookingsEntity();
     PackageEntity packageEntity = new PackageEntity();
-    Integer numberOfTravellers;
-    double numberOfTravellersDouble;
-    Integer randomItineraryNo;
-    double randomIntineraryNoDouble;
-    TextView lblBDItineraryNoValue;
-    TextView lblBDTripStartValue;
-    TextView lblBDTripEndValue;
-    TextView lblBDDescriptionValue;
-    TextView lblBDDestinationValue;
-    TextView lblBDTotalPriceValue;
-    Spinner ddlClassId;
-    Spinner ddlNoOfTravelers;
+    Integer numberOfTravellers, randomItineraryNo;
+    double numberOfTravellersDouble, randomIntineraryNoDouble;
+    TextView lblBDItineraryNoValue, lblBDTripStartValue, lblBDTripEndValue, lblBDDescriptionValue, lblBDDestinationValue, lblBDTotalPriceValue;
+    Spinner ddlClassId, ddlNoOfTravelers;
     Button btnPurchaseConfirm;
     RequestQueue queue;
     Integer[] travellers = {1, 2, 3, 4, 5, 6};
@@ -75,9 +64,11 @@ public class PurchaseActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_purchase);
+
+        // Set up booking info data
+        String bookingNo;
         Intent intent = getIntent();
         Random rand = new Random();
-        String bookingNo;
         lblBDItineraryNoValue = findViewById(R.id.lblBDItineraryNoValue);
         lblBDTripStartValue = findViewById(R.id.lblBDTripStartValue);
         lblBDTripEndValue = findViewById(R.id.lblBDTripEndValue);
@@ -87,16 +78,21 @@ public class PurchaseActivity extends AppCompatActivity {
         ddlClassId = findViewById(R.id.ddlClassId);
         ddlNoOfTravelers = findViewById(R.id.ddlNoOfTravelers);
         btnPurchaseConfirm = findViewById(R.id.btnPurchaseConfirm);
+
+        // Prepare key/value pairs for spinners
         String[] spinnerArray = new String[classes.length];
         HashMap<Integer, String> spinnerMap = new HashMap<Integer, String >();
         for (int i = 0; i < classKeys.length; i++) {
             spinnerMap.put(i, classKeys[i]);
             spinnerArray[i] = classes[i];
         }
+        // Add values to spinners
         ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(this, android.R.layout.simple_spinner_dropdown_item, travellers);
         ddlNoOfTravelers.setAdapter(adapter);
         ArrayAdapter<String> adapter1 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, spinnerArray);
         ddlClassId.setAdapter(adapter1);
+
+        // Generate booking number
         char bookNo1 = (char)(rand.nextInt(26) + 'A');
         char bookNo2 = (char)(rand.nextInt(26) + 'A');
         char bookNo3 = (char)(rand.nextInt(26) + 'A');
@@ -104,10 +100,16 @@ public class PurchaseActivity extends AppCompatActivity {
         Integer bookNo5 = (rand.nextInt(10));
         Integer bookNo6 = (rand.nextInt(10));
         bookingNo = String.valueOf(bookNo1) + String.valueOf(bookNo2) + String.valueOf(bookNo3) + String.valueOf(bookNo4) + String.valueOf(bookNo5) + String.valueOf(bookNo6);
+
+        // Generate random itinerary number
         randomItineraryNo = (rand.nextInt(1000));
         randomIntineraryNoDouble = randomItineraryNo;
+
+        // Grab needed data from intent
         customer = (CustomerEntity) intent.getSerializableExtra("customer");
         packageEntity = (PackageEntity) intent.getSerializableExtra("package");
+
+        // Populate new booking and details
         Date date = new Date();
         Timestamp time = new Timestamp(date.getTime());
         booking.setBookingDate(time);
@@ -126,6 +128,8 @@ public class PurchaseActivity extends AppCompatActivity {
         bookingDetails.setRegionId(packageEntity.getRegionId());
         bookingDetails.setFeeId("BK");
         bookingDetails.setProductSupplierId(null);
+
+        // Populate fields based on booking details
         double itinNo = bookingDetails.getItineraryNo();
         int itinNoInt = (int) itinNo;
         lblBDItineraryNoValue.setText(String.valueOf(itinNoInt));
@@ -134,7 +138,8 @@ public class PurchaseActivity extends AppCompatActivity {
         lblBDDescriptionValue.setText(bookingDetails.getDescription());
         lblBDDestinationValue.setText(bookingDetails.getDestination());
         lblBDTotalPriceValue.setText(FormatHelper.getNiceMoneyFormat(bookingDetails.getBasePrice()));
-        JSONObject bookingJSON = BookingsManager.buildJSONFromBooking(booking);
+
+        // On purchase confirm click, send http request to add new booking
         btnPurchaseConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -143,18 +148,22 @@ public class PurchaseActivity extends AppCompatActivity {
                 numberOfTravellers = (Integer) ddlNoOfTravelers.getSelectedItem();
                 numberOfTravellersDouble = numberOfTravellers;
                 booking.setTravelerCount(numberOfTravellersDouble);
-                ArrayList<BookingEntity> bookingEntities = new ArrayList<>();
+                Log.e("TAG", "onClick: " + numberOfTravellersDouble );
+                ArrayList<BookingsEntity> bookingEntities = new ArrayList<>();
+                JSONObject bookingJSON = BookingsManager.buildJSONFromBooking(booking);
                 queue = Volley.newRequestQueue(getApplicationContext());
                 JsonObjectRequest bookingPost = new JsonObjectRequest(Request.Method.POST, URLManager.getBookingsPostURL(), bookingJSON,
                         new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject response) {
                                 try {
-                                BookingEntity returnedBooking = BookingsManager.buildBooking(response);
+                                // add response to the list of bookings
+                                BookingsEntity returnedBooking = BookingsManager.buildBooking(response);
                                 bookingEntities.add(returnedBooking);
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
+                                // Once booked, send a followup request to grab the new highest bookingID
                                 Executors.newSingleThreadExecutor().execute(new PurchaseActivity.GETHighestBookingId());
                             }
                         }, error -> Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show());
@@ -165,6 +174,31 @@ public class PurchaseActivity extends AppCompatActivity {
             }
         });
     }
+
+    // Grabs the highest booking id (ie, the one just created) after booking creation to use in the new booking detail creation, then goes on to post the bookingdetails
+    public class GETHighestBookingId implements Runnable {
+        @Override
+        public void run() {
+            JsonObjectRequest highestBookingId = new JsonObjectRequest(Request.Method.GET, URLManager.getHighestBookingIdURL(), null,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try {
+                                // Set the booking id into the bookingDetail data object
+                                bookingDetails.setBookingId(response.getInt("highestBookingId"));
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                                Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
+                            }
+                            // Go on to create that booking detail
+                            Executors.newSingleThreadExecutor().execute(new PurchaseActivity.POSTBookingDetails());
+                        }
+                    }, error -> Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show());
+            queue.add(highestBookingId);
+        }
+    }
+
+    // Makes http request to add new booking details after new booking creation
     public class POSTBookingDetails implements Runnable {
 
         @Override
@@ -175,6 +209,7 @@ public class PurchaseActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(JSONObject response) {
                             try {
+                                // After successful response, go to customer activity with customer data in intent
                                 BookingDetailsEntity test = BookingDetailsManager.buildBookingDetails(response);
                                 Toast.makeText(getApplicationContext(), "Successfully purchased " + test.getDestination(), Toast.LENGTH_LONG).show();
                                 Intent intent = new Intent(getApplicationContext(), CustomerActivity.class);
@@ -188,26 +223,6 @@ public class PurchaseActivity extends AppCompatActivity {
                         }
                     }, error -> Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show());
             queue.add(bookingDetailPost);
-        }
-    }
-    public class GETHighestBookingId implements Runnable {
-
-        @Override
-        public void run() {
-            JsonObjectRequest highestBookingId = new JsonObjectRequest(Request.Method.GET, URLManager.getHighestBookingIdURL(), null,
-                    new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(JSONObject response) {
-                            try {
-                                bookingDetails.setBookingId(response.getInt("highestBookingId"));
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                                Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
-                            }
-                            Executors.newSingleThreadExecutor().execute(new PurchaseActivity.POSTBookingDetails());
-                        }
-                    }, error -> Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show());
-            queue.add(highestBookingId);
         }
     }
 }

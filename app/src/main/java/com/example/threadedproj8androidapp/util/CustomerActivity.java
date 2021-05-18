@@ -29,37 +29,32 @@ import com.example.threadedproj8androidapp.model.CustomerEntity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Activity to view and update customer details, view customer booking details, and select those details to view more.
- * Code by Dexter.
+ * Addition of GET booking call/ passing traveler count for proper booking price by Eric. All other code by Dexter.
  */
 
 public class CustomerActivity extends AppCompatActivity implements BookingDetailsAdapter.OnBookingDetailListener {
-    EditText txtCustFName;
-    EditText txtCustLName;
-    EditText txtCustAddress;
-    EditText txtCustCity;
-    EditText txtCustProvince;
-    EditText txtCustPostalCode;
-    EditText txtCustCountry;
-    EditText txtCustHomePhone;
-    EditText txtCustBusPhone;
-    EditText txtCustEmail;
-    TextView lblUsernameValue;
-    TextView lblPasswordValue;
-    Button btnEditCustomer;
-    Button btnLogout;
+
+    // Set up class variables
+    EditText txtCustFName, txtCustLName, txtCustAddress, txtCustCity, txtCustProvince,
+             txtCustPostalCode, txtCustCountry, txtCustHomePhone, txtCustBusPhone, txtCustEmail;
+    TextView lblUsernameValue, lblPasswordValue;
+    Button btnEditCustomer, btnLogout;
     RecyclerView rvBookingDetails;
     BookingDetailsAdapter adapter;
     RequestQueue queue;
     ArrayList<BookingDetailsEntity> bookings = new ArrayList<>();
     CustomerEntity customer;
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Get customer data from intent and populate fields
         setContentView(R.layout.activity_customer);
         Intent intent = getIntent();
         customer = (CustomerEntity) intent.getSerializableExtra("customer");
@@ -93,6 +88,8 @@ public class CustomerActivity extends AppCompatActivity implements BookingDetail
         lblPasswordValue.setText(customer.getPassword());
         rvBookingDetails.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         rvBookingDetails.setAdapter(adapter);
+
+        // Make http request to get bookingdetails
         queue = Volley.newRequestQueue(this);
         JsonArrayRequest detailsRequest = new JsonArrayRequest(Request.Method.GET, URLManager.getBookingDetailsURL(String.valueOf(customer.getCustomerId())), null,
                 new Response.Listener<JSONArray>() {
@@ -111,6 +108,8 @@ public class CustomerActivity extends AppCompatActivity implements BookingDetail
                 }, error -> Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show());
         queue.add(detailsRequest);
         queue.start();
+
+        // On Edit button click, create new customer object using fields, then send request to update customer
         btnEditCustomer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -140,9 +139,10 @@ public class CustomerActivity extends AppCompatActivity implements BookingDetail
                         }, error -> Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show());
                 queue.start();
                 queue.add(custRequest);
-
             }
         });
+
+        // On logout click, go to login activity
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -154,12 +154,35 @@ public class CustomerActivity extends AppCompatActivity implements BookingDetail
         });
     }
 
+    // On click of recyclerview item, start up booking detail popup activity
+    // Need to get and pass along number of travelers also - Eric
     @Override
     public void onBookingDetailClick(int position) {
-        BookingDetailsEntity selectedBooking = bookings.get(position);
-        Intent intent = new Intent(this, BookingDetailsActivity.class);
-        intent.putExtra("booking", selectedBooking);
-        startActivity(intent);
+        BookingDetailsEntity selectedBookingDetail = bookings.get(position);
+        Double travelerCount;
+        Log.e("TAG", "onBookingDetailClick: " + selectedBookingDetail.getBookingId());
+        JsonObjectRequest bookingRequest = new JsonObjectRequest(Request.Method.GET,
+                "http://10.0.2.2:8080/RESTApiForAndroid_war_exploded/api/bookings/get/" + selectedBookingDetail.getBookingId(),
+                null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            Double travelerCount = response.getDouble("travelerCount");
+                            Intent intent = new Intent(getBaseContext(), BookingDetailsActivity.class);
+                            intent.putExtra("booking", selectedBookingDetail);
+                            intent.putExtra("travelerCount", travelerCount);
+                            startActivity(intent);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, error -> Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show());
+        queue.add(bookingRequest);
+        queue.start();
+
+
     }
 }
 

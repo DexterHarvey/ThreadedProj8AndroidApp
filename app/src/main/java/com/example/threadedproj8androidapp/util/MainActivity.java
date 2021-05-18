@@ -52,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Set up control refs
         txtUsername = findViewById(R.id.txtUsername);
         txtPassword = findViewById(R.id.txtPassword);
         btnLogin = findViewById(R.id.btnLogin);
@@ -62,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
         switchRememberMe = findViewById(R.id.switchRememberMe);
         getSupportActionBar().hide(); //add this to hide ActionBar
 
+        // Set if credentials are present in inputs based on whether user coming from login command or not
         Intent intent = getIntent();
         if (intent.getBooleanExtra("isLogout", false)) {
             editor.remove("USERNAME").commit();
@@ -71,8 +74,9 @@ public class MainActivity extends AppCompatActivity {
             txtUsername.setText(intent.getStringExtra("newCustUsername"));
             txtPassword.setText(intent.getStringExtra("newCustPassword"));
         }
-        queue = Volley.newRequestQueue(getApplicationContext());
 
+        // On login button click, make http request to confirm credentials and log in if valid
+        queue = Volley.newRequestQueue(getApplicationContext());
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,30 +85,21 @@ public class MainActivity extends AppCompatActivity {
 
                 if (inputUsername.isEmpty() || inputPassword.isEmpty()) {
                     Toast.makeText(MainActivity.this, "Please enter a username and password", Toast.LENGTH_SHORT).show();
-                    // todo: remove these two lines! just a development speedup
+                    // todo: remove these two lines before production! just a development speedup
                     txtUsername.setText("lenison");
                     txtPassword.setText("example123");
                 } else {
-                    if (switchRememberMe.isChecked()) {
+                    if (switchRememberMe.isChecked()) { // Remember me switch can store credentials in sharedprefs
                         // Request a string response from the provided URL.
                         JsonObjectRequest custRequest = new JsonObjectRequest(Request.Method.GET, URLManager.getLoginURL(inputUsername, inputPassword), null,
                                 response -> {
                                     try {
-                                        if (response.has("customerId"))
-                                            try {
-                                                CustomerEntity customer = CustomerManager.buildCustomer(response);
-                                                Intent intent = new Intent(getApplicationContext(), NavigationActivity.class);
-                                                intent.putExtra("customer", customer);
-                                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                                getApplicationContext().startActivity(intent);
-                                                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                                                editor.putString("USERNAME", inputUsername);
-                                                editor.putString("PASSWORD", inputPassword);
-                                                editor.apply();
-                                            } catch (JSONException e) {
-                                                e.printStackTrace();
-                                            }
-                                        else{
+                                        if (response.has("customerId")) {
+                                            editor.putString("USERNAME", inputUsername);
+                                            editor.putString("PASSWORD", inputPassword);
+                                            editor.apply();
+                                            getCustAndLogIn(response);
+                                        }else {
                                             Toast.makeText(getApplicationContext(), "Invalid Login Credentials. Please try again", Toast.LENGTH_SHORT).show();
                                         }
                                     } catch (Exception e) {
@@ -113,22 +108,13 @@ public class MainActivity extends AppCompatActivity {
                                 }, error -> Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show());
                         queue.start();
                         queue.add(custRequest);
-                    } else {
+                    } else { // if remember me is not pressed, just
                         JsonObjectRequest custRequest = new JsonObjectRequest(Request.Method.GET, URLManager.getLoginURL(inputUsername, inputPassword), null,
                                 response -> {
                                     try {
                                         if (response.has("customerId"))
-                                            try {
-                                                CustomerEntity customer = CustomerManager.buildCustomer(response);
-                                                Intent intent = new Intent(getApplicationContext(), NavigationActivity.class);
-                                                intent.putExtra("customer", (Serializable) customer);
-                                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                                getApplicationContext().startActivity(intent);
-                                                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                                            } catch (JSONException e) {
-                                                e.printStackTrace();
-                                            }
-                                        else{
+                                            getCustAndLogIn(response);
+                                        else {
                                             Toast.makeText(getApplicationContext(), "Invalid Login Credentials. Please try again", Toast.LENGTH_SHORT).show();
                                         }
                                     } catch (Exception e) {
@@ -141,6 +127,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        // On register link press, go to register activity
         lblRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -149,5 +137,15 @@ public class MainActivity extends AppCompatActivity {
                 getApplicationContext().startActivity(intent);
             }
         });
+    }
+
+    // Puts customer info into intent and goes to nav activity
+    private void getCustAndLogIn(org.json.JSONObject response) throws JSONException {
+        CustomerEntity customer = CustomerManager.buildCustomer(response);
+        Intent intent = new Intent(getApplicationContext(), NavigationActivity.class);
+        intent.putExtra("customer", customer);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        getApplicationContext().startActivity(intent);
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
 }

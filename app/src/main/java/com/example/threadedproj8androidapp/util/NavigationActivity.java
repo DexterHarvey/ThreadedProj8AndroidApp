@@ -1,18 +1,14 @@
 package com.example.threadedproj8androidapp.util;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 
 import com.example.threadedproj8androidapp.R;
+import com.example.threadedproj8androidapp.model.CustomerEntity;
 
 import java.io.Serializable;
 
@@ -25,7 +21,7 @@ import java.io.Serializable;
 public class NavigationActivity extends AppCompatActivity {
 
     ImageView btnToMap;
-    ImageView btnToLogin;
+    ImageView btnToCustInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,15 +29,15 @@ public class NavigationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_navigation);
 
         getSupportActionBar().hide(); //add this to hide ActionBar
+        btnToCustInfo = findViewById(R.id.btnToLogin);
+        btnToMap = findViewById(R.id.btnToMap);
 
         // Get customer info passed from login page
         Intent intent = getIntent();
-        com.example.threadedproj8androidapp.model.CustomerEntity customer = (com.example.threadedproj8androidapp.model.CustomerEntity) intent.getSerializableExtra("customer");
+        CustomerEntity customer = (CustomerEntity) intent.getSerializableExtra("customer");
 
-        btnToLogin = findViewById(R.id.btnToLogin);
-        btnToMap = findViewById(R.id.btnToMap);
-
-        btnToLogin.setOnClickListener(new View.OnClickListener() {
+        // On clicking customer info button, go to that activity with cust in intent
+        btnToCustInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), CustomerActivity.class);
@@ -51,6 +47,8 @@ public class NavigationActivity extends AppCompatActivity {
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             }
         });
+
+        // On clicking map button, go to that activity
         btnToMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -50,27 +50,30 @@ import java.util.concurrent.Executors;
 
 public class PackagesActivity extends FragmentActivity implements OnMapReadyCallback, PackagesAdapter.OnItemClicked {
 
+    // Declare variables
     private GoogleMap mMap;
     private ActivityMapsBinding mapsBinding;
     RequestQueue queue;
     RecyclerView rvPackages;
     CustomerEntity customer;
-
     PackageEntity selectedPackage; // holder for last clicked package
     private ArrayList<PkgDestinationsEntity> coordsArray;
     private PackagesAdapter adapter;
-
-    // Holds color sets for package markers
-    private final int[] MARKER_COLOURS = {1, 50, 100, 180, 240, 280, 30, 320, 80};
+    private final int[] MARKER_COLOURS = {1, 50, 100, 180, 240, 280, 30, 320, 80};  // Holds color sets for package markers
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // Get customer data passed by intent
         Intent intent = getIntent();
         customer = (CustomerEntity) intent.getSerializableExtra("customer");
+
+        // Set up maps
         mapsBinding = ActivityMapsBinding.inflate(getLayoutInflater());
         setContentView(mapsBinding.getRoot());
+
+        // Find recycler view for packages
         rvPackages = findViewById(R.id.rvPackages);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.

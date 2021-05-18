@@ -17,17 +17,11 @@ import com.android.volley.Response;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.threadedproj8androidapp.R;
-import com.example.threadedproj8androidapp.managers.BookingsManager;
 import com.example.threadedproj8androidapp.managers.CustomerManager;
 import com.example.threadedproj8androidapp.managers.URLManager;
-import com.example.threadedproj8androidapp.model.BookingEntity;
 import com.example.threadedproj8androidapp.model.CustomerEntity;
 
-import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.concurrent.Executors;
 
 /**
  * Registration page to allow new user to be created.
